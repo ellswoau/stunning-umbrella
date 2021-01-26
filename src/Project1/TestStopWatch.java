@@ -8,6 +8,8 @@ public class TestStopWatch {
  * instructor, create many, many more that shows that your code
  * is functioning correctly.
  *
+ *
+ * Prof says we are expected to have 80-100 unique test cases
  */
 
 //	// default constructor test

@@ -8,8 +8,8 @@ import java.util.Scanner;
  *
  * THIS IS JUST STARTING CODE, MUCH HAS TO BE CHANGED.
  *
- * @author
- * @version
+ * @author Austin Ellsworth & Kit Bazner
+ * @version 01/25/2021
  */
 
 public class StopWatch  {
@@ -26,8 +26,15 @@ public class StopWatch  {
 
 	private static boolean suspend = false;
 
+
+	/**
+	 * default constructor that sets the StopWatch to zero
+	 */
 	public StopWatch() {
-		// TO DO:
+		//setting default stopwatch to zero
+		this.minutes = 0;
+		this.seconds = 0;
+		this.milliseconds = 0;
 	}
 
 	/******************************************************************
@@ -60,7 +67,12 @@ public class StopWatch  {
 			throw new IllegalArgumentException();
 
 		//TO DO: finish code - check milliseconds
+		if (milliseconds < 0)
+			throw new IllegalArgumentException();
 		//TO DO: assign input parameters to instance variables
+		this.minutes = minutes;
+		this.seconds = seconds;
+		this.milliseconds = milliseconds;
 
 
 	}
@@ -203,32 +215,47 @@ public class StopWatch  {
 
 	public int getMinutes() {
 		//TO DO: finish logic
-		return 0; // place holder
+		return this.minutes;
+
+		//return 0; // place holder
 
 	}
 
 	public void setMinutes(int minutes) {
 		//TO DO: finish logic
+		if (minutes < 0 || minutes > 60)
+			throw new IllegalArgumentException();
+		this.minutes = minutes;
 	}
 
 	public int getSeconds() {
 		//TO DO: finish logic
-		return 0; // place holder
+		return this.seconds;
+
+		//return 0; // place holder
 
 	}
 
 	public void setSeconds(int seconds) {
 		//TO DO: finish logic
+		if (seconds < 0 || seconds > 60)
+			throw new IllegalArgumentException();
+		this.seconds = seconds;
 	}
 
 	public int getMilliseconds() {
 		//TO DO: finish logic
-		return 0; // place holder
+		return this.milliseconds;
+
+		//return 0; // place holder
 
 	}
 
 	public void setMilliseconds(int milliseconds) {
 		//TO DO: finish logic
+		if (milliseconds < 0 || milliseconds > 999)
+			throw new IllegalArgumentException();
+		this.milliseconds = milliseconds;
 	}
 
 }

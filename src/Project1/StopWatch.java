@@ -63,11 +63,11 @@ public class StopWatch  {
 		if (minutes < 0)
 			throw new IllegalArgumentException("constuctor with 3 params");
 
-		if (seconds < 0)
+		if (seconds < 0 || seconds > 59)
 			throw new IllegalArgumentException();
 
 		//TO DO: finish code - check milliseconds
-		if (milliseconds < 0)
+		if (milliseconds < 0 || milliseconds > 999)
 			throw new IllegalArgumentException();
 		//TO DO: assign input parameters to instance variables
 		this.minutes = minutes;
@@ -88,11 +88,22 @@ public class StopWatch  {
 
 	public StopWatch(int seconds, int milliseconds) {
 		//TO DO:
+		this.minutes = 0;
+		if (seconds < 0 || seconds > 59 || milliseconds < 0 || milliseconds > 999)
+			throw new IllegalArgumentException();
+		this.seconds = seconds;
+		this.milliseconds = milliseconds;
+
 	}
 
 
 	public StopWatch(int milliseconds) {
 		// TO DO:
+		this.minutes = 0;
+		this.seconds = 0;
+		if (milliseconds < 0 || milliseconds > 59)
+			throw new IllegalArgumentException();
+		this.milliseconds = milliseconds;
 	}
 
 	public static boolean equals(StopWatch stopWatch1, StopWatch stopWatch2) {
@@ -223,7 +234,7 @@ public class StopWatch  {
 
 	public void setMinutes(int minutes) {
 		//TO DO: finish logic
-		if (minutes < 0 || minutes > 60)
+		if (minutes < 0)
 			throw new IllegalArgumentException();
 		this.minutes = minutes;
 	}
@@ -238,7 +249,7 @@ public class StopWatch  {
 
 	public void setSeconds(int seconds) {
 		//TO DO: finish logic
-		if (seconds < 0 || seconds > 60)
+		if (seconds < 0 || seconds > 59)
 			throw new IllegalArgumentException();
 		this.seconds = seconds;
 	}

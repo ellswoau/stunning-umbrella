@@ -1,5 +1,8 @@
 package Project1;
 
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 public class TestStopWatch {
 
 /**
@@ -44,21 +47,21 @@ public class TestStopWatch {
 //		StopWatch s = new StopWatch(12,67,14);
 //	}
 //
-//	@Test
-//	public void testConstructor() {
-//		StopWatch s = new StopWatch(5,10,300);
-//		assertEquals(s.toString(),"5:10:300");
-//
-//		s = new StopWatch("20:10:8");
-//		assertEquals(s.toString(),"20:10:008");
-//
-//		s = new StopWatch("20:8");
-//		assertEquals(s.toString(),"0:20:008");
-//
-//		s = new StopWatch("8");
-//		assertEquals(s.toString(),"0:00:008");
-//
-//	}
+	@Test
+	public void testConstructor() {
+		StopWatch s = new StopWatch(5,10,300);
+		assertEquals(s.toString(),"5:10:300");
+
+		s = new StopWatch("20:10:8");
+		assertEquals(s.toString(),"20:10:008");
+
+		s = new StopWatch("20:8");
+		assertEquals(s.toString(),"0:20:008");
+
+		s = new StopWatch("8");
+		assertEquals(s.toString(),"0:00:008");
+
+	}
 //
 //	// There can only be one test here
 //	// no more lines of code after "new StopWatch("-2");"

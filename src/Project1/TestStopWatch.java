@@ -15,81 +15,111 @@ public class TestStopWatch {
  * Prof says we are expected to have 80-100 unique test cases
  */
 
-//	// default constructor test
-//	@Test
-//	public void testDefaultConstructor() {
-//		StopWatch s = new StopWatch();
-//		assertTrue(s.getMinutes() == 0);
-//		assertTrue(s.getSeconds() == 0);
-//		assertTrue(s.getMilliseconds() == 0);
-//	}
-//
-//	@Test
-//	public void testConstructor3Parameters()
-//	{
-//		StopWatch s = new StopWatch(2,3,4);
-//		assertTrue(s.getMinutes() == 2);
-//		assertTrue(s.getSeconds() == 3);
-//		assertTrue(s.getMilliseconds() == 4);
-//	}
-//
-//	@Test (expected = IllegalArgumentException.class)
-//	public void testConstructor3ParametersX()
-//	{
-//		StopWatch s = new StopWatch(2,-3,4);
-//		StopWatch s1 = new StopWatch(-2,3,4);
-//		StopWatch s2 = new StopWatch(2,3,-4);
-//
-//	}
-//
-//	@Test (expected = IllegalArgumentException.class)
-//	public void testConstructor3e2Parameters() {
-//		StopWatch s = new StopWatch(12,67,14);
-//	}
-//
+	// default constructor test
 	@Test
-	public void testConstructor() {
-		StopWatch s = new StopWatch(5,10,300);
-		assertEquals(s.toString(),"5:10:300");
+	public void testDefaultConstructor() {
+		StopWatch s = new StopWatch();
+		assertTrue(s.getMinutes() == 0);
+		assertTrue(s.getSeconds() == 0);
+		assertTrue(s.getMilliseconds() == 0);
+	}
 
-		s = new StopWatch("20:10:8");
-		assertEquals(s.toString(),"20:10:008");
+	//3 Integer constructor tests
+	@Test
+	public void testConstructor3Parameters()
+	{
+		StopWatch s = new StopWatch(2,3,4);
+		assertTrue(s.getMinutes() == 2);
+		assertTrue(s.getSeconds() == 3);
+		assertTrue(s.getMilliseconds() == 4);
+	}
 
-		s = new StopWatch("20:8");
-		assertEquals(s.toString(),"0:20:008");
+	@Test (expected = IllegalArgumentException.class)
+	public void testConstructor3ParametersXMinutes()
+	{
+		StopWatch s = new StopWatch(-2, 3, 4);
+	}
 
-		s = new StopWatch("8");
-		assertEquals(s.toString(),"0:00:008");
+	@Test (expected = IllegalArgumentException.class)
+	public void testConstructor3ParametersXSeconds()
+	{
+		StopWatch s = new StopWatch(2, -3, 4);
+	}
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testConstructor3ParametersXMilliseconds()
+	{
+		StopWatch s = new StopWatch(2, 3, -4);
+	}
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testConstructor3e2Parameters() {
+		StopWatch s = new StopWatch(12,67,14);
+	}
+
+	//2 Integer constructor tests
+
+	// 1 Integer constructor tests
+
+	//String constructor tests
+	@Test
+	public void testStringConstructor3Input()
+	{
+		StopWatch s = new StopWatch("20:10:8");
+		assertEquals(s.getMilliseconds(), 8);
+		assertEquals(s.getSeconds(), 10);
+		assertEquals(s.getMinutes(), 20);
+	}
+
+	@Test
+	public void testStringConstructor2Input()
+	{
+		StopWatch s = new StopWatch("4:50");
+		assertEquals(s.getMilliseconds(), 50);
+		assertEquals(s.getSeconds(), 4);
+		assertEquals(s.getMinutes(), 0);
+	}
+
+	@Test
+	public void testStringConstructor1Input()
+	{
+		StopWatch s = new StopWatch("8");
+		assertEquals(s.getMilliseconds(), 8);
+		assertEquals(s.getSeconds(), 0);
+		assertEquals(s.getMinutes(), 0);
+	}
+
+	// There can only be one test here
+	// no more lines of code after "new StopWatch("-2");"
+	@Test (expected = IllegalArgumentException.class)
+	public void testNegSingleInput2() {
+		new StopWatch(-2);
 
 	}
-//
-//	// There can only be one test here
-//	// no more lines of code after "new StopWatch("-2");"
-//	@Test (expected = IllegalArgumentException.class)
-//	public void testNegSingleInput2() {
-//		new StopWatch(-2);
-//
-//	}
-//
-//	@Test (expected = IllegalArgumentException.class)
-//	public void testNegDouble1Input() {
-//		new StopWatch("-59:-23");
-//
-//	}
-//
-//
-//	@Test (expected = IllegalArgumentException.class)
-//	public void testNegDouble2aInput() {
-//		new StopWatch("2:-2");
-//
-//	}
-//
-//
-//	@Test (expected = IllegalArgumentException.class)
-//	public void testAlphaInput() {
-//		new StopWatch("a");
-//	}
-//
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testNegDouble1Input() {
+		new StopWatch("-59:23");
+
+	}
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testNegMinuteInput() {
+		new StopWatch("-1:30:50");
+	}
+
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testNegDouble2aInput() {
+		new StopWatch("2:-2");
+	}
+
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testAlphaInput() {
+		new StopWatch("a");
+	}
+
 //	@Test
 //	public void testAddMethod () {
 //		StopWatch s1 = new StopWatch(5,59,300);
@@ -108,6 +138,21 @@ public class TestStopWatch {
 //		assertEquals (s1.toString(),"8:16:600");
 //	}
 //
+//	@Test
+//	public void testToString() {
+//		StopWatch s = new StopWatch(5,10,300);
+//		assertEquals(s.toString(),"5:10:300");
+//
+//		s = new StopWatch("20:10:8");
+//		assertEquals(s.toString(),"20:10:008");
+//
+//		s = new StopWatch("20:8");
+//		assertEquals(s.toString(),"0:20:008");
+//
+//		s = new StopWatch("8");
+//		assertEquals(s.toString(),"0:00:008");
+//
+//	}
 //
 //	@Test
 //	public void testEqual () {

@@ -55,9 +55,9 @@ public class StopWatch  {
 	public StopWatch(String startTime) {
 		if (startTime == null)
 			throw new IllegalArgumentException();
-		minutes = 0;
-		seconds = 0;
-		milliseconds = 0;
+		int minutes = 0;
+		int seconds = 0;
+		int milliseconds = 0;
 
 		String[] s = startTime.split(":");
 
@@ -78,7 +78,10 @@ public class StopWatch  {
 
 		if(minutes < 0 || seconds < 0 || seconds > 59  || milliseconds < 0 || milliseconds > 999)
 			throw new IllegalArgumentException();
-		//TO DO: finish code
+
+		this.minutes = minutes;
+		this.seconds = seconds;
+		this.milliseconds = milliseconds;
 	}
 
 	public StopWatch(int minutes, int seconds, int milliseconds) {
@@ -99,14 +102,6 @@ public class StopWatch  {
 
 	}
 
-	public StopWatch(StopWatch stopWatch) {
-		if (stopWatch == null)
-			throw new IllegalArgumentException();
-
-		this.minutes = stopWatch.minutes;
-		this.seconds = stopWatch.seconds;
-		this.milliseconds = stopWatch.milliseconds;
-	}
 
 	public StopWatch(int seconds, int milliseconds) {
 		//TO DO:
@@ -128,9 +123,21 @@ public class StopWatch  {
 		this.milliseconds = milliseconds;
 	}
 
+	public StopWatch(StopWatch stopWatch) {
+		if (stopWatch == null)
+			throw new IllegalArgumentException();
+
+		this.minutes = stopWatch.minutes;
+		this.seconds = stopWatch.seconds;
+		this.milliseconds = stopWatch.milliseconds;
+	}
+
+	//needs testing
 	public static boolean equals(StopWatch stopWatch1, StopWatch stopWatch2) {
-		//TO DO:
-		return false; // place holder
+		if (stopWatch1 == null || stopWatch2 == null)
+			throw new IllegalArgumentException();
+		return (stopWatch1.getMilliseconds() == stopWatch2.getMilliseconds()) && (stopWatch1.getSeconds() == stopWatch2.getSeconds())
+			&& (stopWatch1.getMinutes() == stopWatch2.getMinutes());
 	}
 
 	public boolean equals(Object object) {
@@ -139,12 +146,27 @@ public class StopWatch  {
 
 	}
 
+	//needs testing
 	public int compareTo(StopWatch other) {
 		if (other == null)
 			throw new IllegalArgumentException();
 
-		//TO DO: finish logic
-		return 0; // place holder
+		if (this.minutes > other.getMinutes())
+			return 1;
+		if (this.minutes < other.getMinutes())
+			return -1;
+
+		if (this.seconds > other.getSeconds())
+			return 1;
+		if (this.seconds < other.getSeconds())
+			return -1;
+
+		if (this.milliseconds > other.getMilliseconds())
+			return 1;
+		if (this.milliseconds < other.getMilliseconds())
+			return -1;
+
+		return 0;
 
 	}
 
@@ -189,11 +211,35 @@ public class StopWatch  {
 	}
 
 	public void inc() {
-		//TO DO: finish logic
+	//TO DO: Test Logic
+		if (milliseconds == 999){
+			milliseconds = 0;
+			if (seconds == 59){
+				seconds = 0;
+				minutes ++;
+			}
+			else
+				seconds ++;
+		}
+		else
+			milliseconds ++;
 	}
 
 	public void dec() {
-		//TO DO: finish logic
+		if (milliseconds == 0 && seconds == 0 && minutes == 0)
+			throw new IllegalArgumentException();
+		if (milliseconds == 0) {
+			milliseconds = 999;
+			if (seconds == 0){
+				seconds = 59;
+				minutes--;
+			}
+			else
+				seconds --;
+		}
+		else
+			milliseconds --;
+		//TO DO: test logic
 	}
 
 	public String toString() {

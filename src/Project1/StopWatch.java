@@ -148,13 +148,20 @@ public class StopWatch  {
 
 	}
 
+	/*****************************************************************
+	 * Method that converts StopWatch object to milliseconds.
+	 *****************************************************************/
 	private static int convertToMilli (StopWatch stopWatch) {
 		if (stopWatch == null)
 			throw new IllegalArgumentException();
 
 		//TO DO: convert the stopWatch passed as input
 		//TO DO: parameter into milliseconds
-		return 0; // place holder
+		int tmpMilliseconds;
+		tmpMilliseconds = stopWatch.milliseconds;
+		tmpMilliseconds += (stopWatch.seconds * 1000);
+		tmpMilliseconds += (stopWatch.minutes * 60000);
+		return tmpMilliseconds;
 
 	}
 
@@ -167,14 +174,27 @@ public class StopWatch  {
 		milliseconds = tempMilliseconds;
 	}
 
+	/*****************************************************************
+	 * Method uses for loop to run inc method n (milliseconds) number
+	 * of times.
+	 *****************************************************************/
 	public void add(int milliseconds) {
 		if (!suspend) {
 			//TO DO: finish logic
+			for (int i = 0; i < milliseconds; i++) {
+				this.inc();
+			}
 		}
 	}
-
+	/*****************************************************************
+	 * Method uses for loop to run dec method n (milliseconds) number
+	 * of times.
+	 *****************************************************************/
 	public void sub(int milliseconds) {
 		//TO DO: finish logic
+		for (int i = 0; i < milliseconds; i++) {
+		this.dec();
+		}
 
 	}
 
@@ -188,17 +208,69 @@ public class StopWatch  {
 
 	}
 
+	/*****************************************************************
+	 * Method that increases the StopWatch object by 1 millisecond.
+	 * Calls the convertToMilli method, adds one, then updates object
+	 * variables.
+	 *****************************************************************/
 	public void inc() {
 		//TO DO: finish logic
+		int tmpMilliseconds = convertToMilli(this);
+		tmpMilliseconds++;
+
+		this.minutes = tmpMilliseconds / 60000;
+		tmpMilliseconds %= 60000;
+		this.seconds = tmpMilliseconds / 1000;
+		tmpMilliseconds %= 1000;
+		this.milliseconds = tmpMilliseconds;
 	}
 
+	/*****************************************************************
+	 * Method that decreases the StopWatch object by 1 millisecond.
+	 * Calls the convertToMilli method, subtracts one, then updates
+	 * object variables.
+	 *****************************************************************/
 	public void dec() {
 		//TO DO: finish logic
+		int tmpMilliseconds = convertToMilli(this);
+		tmpMilliseconds--;
+
+		minutes = tmpMilliseconds / 60000;
+		tmpMilliseconds %= 60000;
+		seconds = tmpMilliseconds / 1000;
+		tmpMilliseconds %= 1000;
+		milliseconds = tmpMilliseconds;
 	}
 
+	/*****************************************************************
+	 * Method concats minutes, seconds, milliseconds variables into
+	 * temporary string variable and adds leading zeros based on the
+	 * values of seconds and milliseconds. Returns a string.
+	 *****************************************************************/
 	public String toString() {
 		//TO DO: finish logic
-		return null; // place holder
+		String outputString = "";
+
+		outputString += "" + minutes + ":";
+
+		if (seconds < 10) {
+			outputString += "0" + seconds + ":";
+		}
+		else {
+			outputString += "" + seconds + ":";
+		}
+
+		if (milliseconds < 10) {
+			outputString += "00" + milliseconds;
+		}
+		else if (milliseconds < 100 ) {
+			outputString += "0" + milliseconds;
+		}
+		else if (milliseconds >= 1000) {
+			outputString = "" + milliseconds;
+		}
+
+		return outputString;
 
 	}
 

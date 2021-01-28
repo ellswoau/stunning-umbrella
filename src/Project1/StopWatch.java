@@ -333,9 +333,19 @@ public class StopWatch  {
 		this.minutes = minutes;
 	}
 
+	/*****************************************************************
+	 * Method multiplies minutes by 60, adds to seconds, and returns
+	 * the temp variable for total number of seconds.
+	 *
+	 * !!!Ask professor if these should return only the seconds variable
+	 * or the TOTAL number of seconds???
+	 *****************************************************************/
 	public int getSeconds() {
 		//TO DO: finish logic
-		return this.seconds;
+		int tmpSeconds = 0;
+		tmpSeconds += seconds;
+		tmpSeconds += (minutes * 60);
+		return tmpSeconds;
 
 		//return 0; // place holder
 

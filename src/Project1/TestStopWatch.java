@@ -126,12 +126,12 @@ public class TestStopWatch {
 
 	@Test (expected = IllegalArgumentException.class)
 	public void testConstructor1ParameterXMilliseconds() {
-		new StopWatch (-1);
+		new StopWatch(-1);
 	}
 
 	@Test (expected = IllegalArgumentException.class)
 	public void testConstructor1ParameterLMilliseconds(){
-		new StopWatch (1000);
+		new StopWatch(1000);
 	}
 
 	//String constructor tests
@@ -178,7 +178,7 @@ public class TestStopWatch {
 	@Test (expected = IllegalArgumentException.class)
 	public void testStringConstructorNullString(){
 		String s = null;
-		new StopWatch (s);
+		new StopWatch(s);
 	}
 
 	@Test (expected = IllegalArgumentException.class)
@@ -210,7 +210,7 @@ public class TestStopWatch {
 
 	@Test (expected = IllegalArgumentException.class)
 	public void testStringConstructorExtraColon(){
-		new StopWatch ("50:45:40:35");
+		new StopWatch("50:45:40:35");
 	}
 
 	@Test (expected = IllegalArgumentException.class)

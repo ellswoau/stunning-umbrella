@@ -55,9 +55,9 @@ public class StopWatch  {
 	public StopWatch(String startTime) {
 		if (startTime == null)
 			throw new IllegalArgumentException();
-		minutes = 0;
-		seconds = 0;
-		milliseconds = 0;
+		int minutes = 0;
+		int seconds = 0;
+		int milliseconds = 0;
 
 		String[] s = startTime.split(":");
 
@@ -78,7 +78,10 @@ public class StopWatch  {
 
 		if(minutes < 0 || seconds < 0 || seconds > 59  || milliseconds < 0 || milliseconds > 999)
 			throw new IllegalArgumentException();
-		//TO DO: finish code
+
+		this.minutes = minutes;
+		this.seconds = seconds;
+		this.milliseconds = milliseconds;
 	}
 
 	public StopWatch(int minutes, int seconds, int milliseconds) {

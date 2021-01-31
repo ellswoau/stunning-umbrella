@@ -227,6 +227,8 @@ public class StopWatch  {
 	 * of times.
 	 *****************************************************************/
 	public void add(int milliseconds) {
+		if (milliseconds < 0)
+			throw new IllegalArgumentException();
 		if (!suspend) {
 			for (int i = 0; i < milliseconds; i++) {
 				this.inc();
@@ -238,6 +240,8 @@ public class StopWatch  {
 	 * of times.
 	 *****************************************************************/
 	public void sub(int milliseconds) {
+		if (milliseconds < 0)
+			throw new IllegalArgumentException();
 		for (int i = 0; i < milliseconds; i++) {
 			this.dec();
 		}
@@ -324,8 +328,8 @@ public class StopWatch  {
 		else if (milliseconds < 100 ) {
 			outputString += "0" + milliseconds;
 		}
-		else if (milliseconds >= 1000) {
-			outputString = "" + milliseconds;
+		else{
+			outputString += "" + milliseconds;
 		}
 
 		return outputString;

@@ -20,6 +20,9 @@ public class StopWatch  {
 	private int seconds;
 	private int milliseconds;
 
+	private StopWatch stopWatch, stopWatch1, stopWatch2;
+	private Object other;
+
 	private static boolean suspend = false;
 
 

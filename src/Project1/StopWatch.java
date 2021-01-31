@@ -15,21 +15,17 @@ import java.util.Scanner;
 public class StopWatch  {
 
 
-	/**
-	 * This holds minutes for our stopwatch
-	 */
+	// private variables to hold stopwatch time
 	private int minutes;
-
-
 	private int seconds;
 	private int milliseconds;
 
 	private static boolean suspend = false;
 
 
-	/**
-	 * default constructor that sets the StopWatch to zero
-	 */
+	/*****************************************************************
+	 * Default constructor that sets stopwatch object variables to zero
+	 *****************************************************************/
 	public StopWatch() {
 		//setting default stopwatch to zero
 		this.minutes = 0;
@@ -76,25 +72,28 @@ public class StopWatch  {
 		else
 			throw new IllegalArgumentException();
 
-		if(minutes < 0 || seconds < 0 || seconds > 59  || milliseconds < 0 || milliseconds > 999)
+		if(minutes < 0 || seconds < 0 || seconds > 59  || milliseconds < 0 || milliseconds > 999) {
 			throw new IllegalArgumentException();
-
+		}
 		this.minutes = minutes;
 		this.seconds = seconds;
 		this.milliseconds = milliseconds;
 	}
 
+	/*****************************************************************
+	 *Constructor for stopwatch object using integer inputs for minutes
+	 * seconds and milliseconds
+	 *****************************************************************/
 	public StopWatch(int minutes, int seconds, int milliseconds) {
-		if (minutes < 0)
+		if (minutes < 0) {
 			throw new IllegalArgumentException("constuctor with 3 params");
-
-		if (seconds < 0 || seconds > 59)
+		}
+		if (seconds < 0 || seconds > 59) {
 			throw new IllegalArgumentException();
-
-		//TO DO: finish code - check milliseconds
-		if (milliseconds < 0 || milliseconds > 999)
+		}
+		if (milliseconds < 0 || milliseconds > 999) {
 			throw new IllegalArgumentException();
-		//TO DO: assign input parameters to instance variables
+		}
 		this.minutes = minutes;
 		this.seconds = seconds;
 		this.milliseconds = milliseconds;
@@ -102,36 +101,44 @@ public class StopWatch  {
 
 	}
 
-
+	/*****************************************************************
+	 * Construct for stopwatch object usings seconds and milliseconds
+	 *****************************************************************/
 	public StopWatch(int seconds, int milliseconds) {
-		//TO DO:
 		this.minutes = 0;
-		if (seconds < 0 || seconds > 59 || milliseconds < 0 || milliseconds > 999)
+		if (seconds < 0 || seconds > 59 || milliseconds < 0 || milliseconds > 999) {
 			throw new IllegalArgumentException();
+		}
 		this.seconds = seconds;
 		this.milliseconds = milliseconds;
 
 	}
 
 
+	/*****************************************************************
+	 * Constructor for stopwatch object using only milliseconds
+	 *****************************************************************/
 	public StopWatch(int milliseconds) {
-		// TO DO:
 		this.minutes = 0;
 		this.seconds = 0;
-		if (milliseconds < 0 || milliseconds > 59)
+		// changed milliseconds greater than from 59 to 999
+		if (milliseconds < 0 || milliseconds > 999) {
 			throw new IllegalArgumentException();
+		}
 		this.milliseconds = milliseconds;
-	}
 
 	public StopWatch(StopWatch stopWatch) {
-		if (stopWatch == null)
+		if (stopWatch == null) {
 			throw new IllegalArgumentException();
-
+		}
 		this.minutes = stopWatch.minutes;
 		this.seconds = stopWatch.seconds;
 		this.milliseconds = stopWatch.milliseconds;
 	}
 
+	/*****************************************************************
+	 * Equals method that compares stopwatches by calling getters
+	 *****************************************************************/
 	//needs testing
 	public static boolean equals(StopWatch stopWatch1, StopWatch stopWatch2) {
 		if (stopWatch1 == null || stopWatch2 == null)
@@ -140,6 +147,9 @@ public class StopWatch  {
 			&& (stopWatch1.getMinutes() == stopWatch2.getMinutes());
 	}
 
+	/*****************************************************************
+	 * Method that compares stopwatch objects using instanceof
+	 *****************************************************************/
 	public boolean equals(Object other) {
 		if (other == null)
 			throw new IllegalArgumentException();
@@ -151,6 +161,11 @@ public class StopWatch  {
 			throw new IllegalArgumentException();
 	}
 
+
+	/*****************************************************************
+	 * Method that compares this stopwatch with other stopwatch. Checks
+	 * variables with greater amount first for efficiency and readability.
+	 *****************************************************************/
 	//needs testing
 	public int compareTo(StopWatch other) {
 		if (other == null)
@@ -182,8 +197,6 @@ public class StopWatch  {
 		if (stopWatch == null)
 			throw new IllegalArgumentException();
 
-		//TO DO: convert the stopWatch passed as input
-		//TO DO: parameter into milliseconds
 		int tmpMilliseconds;
 		tmpMilliseconds = stopWatch.milliseconds;
 		tmpMilliseconds += (stopWatch.seconds * 1000);
@@ -192,6 +205,10 @@ public class StopWatch  {
 
 	}
 
+	/*****************************************************************
+	 * Method that converts an integer input of milliseconds and converts
+	 * it into a stopwatch.
+	 *****************************************************************/
 	private void convertToStopWatch (int tempMilliseconds) {
 		minutes = tempMilliseconds / 60000;
 		tempMilliseconds %= 60000;
@@ -207,7 +224,6 @@ public class StopWatch  {
 	 *****************************************************************/
 	public void add(int milliseconds) {
 		if (!suspend) {
-			//TO DO: finish logic
 			for (int i = 0; i < milliseconds; i++) {
 				this.inc();
 			}
@@ -218,13 +234,17 @@ public class StopWatch  {
 	 * of times.
 	 *****************************************************************/
 	public void sub(int milliseconds) {
-		//TO DO: finish logic
 		for (int i = 0; i < milliseconds; i++) {
 		this.dec();
 		}
 
 	}
 
+
+	/*****************************************************************
+	 * Method to add two stopwatches together, converts second stopwatch
+	 * object to milliseconds then loops the inc method
+	 *****************************************************************/
 	public void add(StopWatch stopWatch) {
 		int tmpMilliseconds = convertToMilli(stopWatch);
 		for (int i = 0; i < tmpMilliseconds; i++){
@@ -233,6 +253,10 @@ public class StopWatch  {
 
 	}
 
+	/*****************************************************************
+	 * Method that subtracts stopwatch objects by converting the input
+	 * stopwatch to milliseconds then loops the dec method
+	 *****************************************************************/
 	public void sub(StopWatch stopWatch) {
 		int tmpMilliseconds = convertToMilli(stopWatch);
 		for (int i = 0; i < tmpMilliseconds; i++){
@@ -247,7 +271,6 @@ public class StopWatch  {
 	 * variables.
 	 *****************************************************************/
 	public void inc() {
-		//TO DO: finish logic
 		int tmpMilliseconds = convertToMilli(this);
 		tmpMilliseconds++;
 
@@ -264,7 +287,6 @@ public class StopWatch  {
 	 * object variables.
 	 *****************************************************************/
 	public void dec() {
-		//TO DO: finish logic
 		int tmpMilliseconds = convertToMilli(this);
 		tmpMilliseconds--;
 
@@ -281,7 +303,6 @@ public class StopWatch  {
 	 * values of seconds and milliseconds. Returns a string.
 	 *****************************************************************/
 	public String toString() {
-		//TO DO: finish logic
 		String outputString = "";
 
 		outputString += "" + minutes + ":";
@@ -306,7 +327,10 @@ public class StopWatch  {
 		return outputString;
 
 	}
-
+	/*****************************************************************
+	 * Method that saves the current object using "out" and printing
+	 * each variable on a new line.
+	 *****************************************************************/
 	public void save(String filename) {
 		if (filename == null)
 			throw new IllegalArgumentException();
@@ -315,7 +339,9 @@ public class StopWatch  {
 		try {
 			out = new PrintWriter(new BufferedWriter(new FileWriter(filename)));
 
-			//TO DO: finish - write fields to file
+			System.out.println(minutes);
+			System.out.println(seconds);
+			System.out.println(milliseconds);
 
 			out.close();
 
@@ -325,7 +351,10 @@ public class StopWatch  {
 
 	}
 
-
+	/*****************************************************************
+	 * Method that loads a stopwatch object and reads each variable
+	 * from the next line.
+	 *****************************************************************/
 	public void load(String filename)  {
 		if (filename == null)
 			throw new IllegalArgumentException();
@@ -333,8 +362,9 @@ public class StopWatch  {
 		Scanner scanner = null;
 		try {
 			scanner = new Scanner(new File(filename));
-
-			//TO DO: read fields into instance variables
+			minutes = scanner.next();
+			seconds = scanner.next();
+			milliseconds = scanner.next();
 
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException();
@@ -342,55 +372,64 @@ public class StopWatch  {
 
 	}
 
+	/*****************************************************************
+	 *UNKNOWN
+	 *****************************************************************/
 	public static void setSuspend(boolean suspend) {
 		//TO DO: finish logic
 	}
 
+	/*****************************************************************
+	 *UNKOWN
+	 *****************************************************************/
 	public static boolean isSuspended() {
 		//TO DO: finish logic
 		return false; // place holder
 	}
 
+	/*****************************************************************
+	 * Getting method for minutes
+	 *****************************************************************/
 	public int getMinutes() {
-		//TO DO: finish logic
 		return this.minutes;
-
-		//return 0; // place holder
-
 	}
 
+	/*****************************************************************
+	 * Setter method for minutes
+	 *****************************************************************/
 	public void setMinutes(int minutes) {
-		//TO DO: finish logic
 		if (minutes < 0)
 			throw new IllegalArgumentException();
 		this.minutes = minutes;
 	}
 
+	/*****************************************************************
+	 * Getter method for seconds
+	 *****************************************************************/
 	public int getSeconds() {
-		//TO DO: finish logic
 		return this.seconds;
-
-		//return 0; // place holder
-
 	}
 
+	/*****************************************************************
+	 * Setter method for seconds
+	 *****************************************************************/
 	public void setSeconds(int seconds) {
-		//TO DO: finish logic
 		if (seconds < 0 || seconds > 59)
 			throw new IllegalArgumentException();
 		this.seconds = seconds;
 	}
 
+	/*****************************************************************
+	 * Getter method for milliseconds
+	 *****************************************************************/
 	public int getMilliseconds() {
-		//TO DO: finish logic
 		return this.milliseconds;
-
-		//return 0; // place holder
-
 	}
 
+	/*****************************************************************
+	 * Setter method for milliseconds
+	 *****************************************************************/
 	public void setMilliseconds(int milliseconds) {
-		//TO DO: finish logic
 		if (milliseconds < 0 || milliseconds > 999)
 			throw new IllegalArgumentException();
 		this.milliseconds = milliseconds;

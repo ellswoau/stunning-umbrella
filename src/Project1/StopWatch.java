@@ -129,6 +129,7 @@ public class StopWatch  {
 			throw new IllegalArgumentException();
 		}
 		this.milliseconds = milliseconds;
+	}
 
 	public StopWatch(StopWatch stopWatch) {
 		if (stopWatch == null) {

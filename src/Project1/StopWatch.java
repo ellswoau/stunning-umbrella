@@ -148,7 +148,7 @@ public class StopWatch  {
 		if (stopWatch1 == null || stopWatch2 == null)
 			throw new IllegalArgumentException();
 		return (stopWatch1.getMilliseconds() == stopWatch2.getMilliseconds()) && (stopWatch1.getSeconds() == stopWatch2.getSeconds())
-			&& (stopWatch1.getMinutes() == stopWatch2.getMinutes());
+				&& (stopWatch1.getMinutes() == stopWatch2.getMinutes());
 	}
 
 	/*****************************************************************
@@ -239,7 +239,7 @@ public class StopWatch  {
 	 *****************************************************************/
 	public void sub(int milliseconds) {
 		for (int i = 0; i < milliseconds; i++) {
-		this.dec();
+			this.dec();
 		}
 
 	}
@@ -366,9 +366,9 @@ public class StopWatch  {
 		Scanner scanner = null;
 		try {
 			scanner = new Scanner(new File(filename));
-			minutes = scanner.next();
-			seconds = scanner.next();
-			milliseconds = scanner.next();
+			int minutes = scanner.next();
+			int seconds = scanner.next();
+			int milliseconds = scanner.next();
 
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException();

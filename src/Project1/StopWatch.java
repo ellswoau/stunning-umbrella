@@ -89,7 +89,7 @@ public class StopWatch  {
 	 *****************************************************************/
 	public StopWatch(int minutes, int seconds, int milliseconds) {
 		if (minutes < 0) {
-			throw new IllegalArgumentException("constuctor with 3 params");
+			throw new IllegalArgumentException("constructor with 3 params");
 		}
 		if (seconds < 0 || seconds > 59) {
 			throw new IllegalArgumentException();
@@ -105,7 +105,7 @@ public class StopWatch  {
 	}
 
 	/*****************************************************************
-	 * Construct for stopwatch object usings seconds and milliseconds
+	 * Construct for stopwatch object using seconds and milliseconds
 	 *****************************************************************/
 	public StopWatch(int seconds, int milliseconds) {
 		this.minutes = 0;
@@ -366,9 +366,9 @@ public class StopWatch  {
 		Scanner scanner = null;
 		try {
 			scanner = new Scanner(new File(filename));
-			int minutes = scanner.next();
-			int seconds = scanner.next();
-			int milliseconds = scanner.next();
+			int minutes = scanner.nextInt();
+			int seconds = scanner.nextInt();
+			int milliseconds = scanner.nextInt();
 
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException();
@@ -384,7 +384,7 @@ public class StopWatch  {
 	}
 
 	/*****************************************************************
-	 *UNKOWN
+	 *UNKNOWN
 	 *****************************************************************/
 	public static boolean isSuspended() {
 		//TO DO: finish logic

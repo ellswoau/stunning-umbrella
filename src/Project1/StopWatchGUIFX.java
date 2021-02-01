@@ -33,6 +33,9 @@ public class StopWatchGUIFX extends Application {
         HBox root = new HBox();
         root.setPadding(new Insets(20));
         root.getChildren().add (new StopWatchPanelFX());
+        root.getChildren().add (new StopWatchPanelFX());
+        root.getChildren().add (new StopWatchPanelFX());
+
 
         susButton = new Button("Suspend is OFF");
         root.getChildren().add (susButton);

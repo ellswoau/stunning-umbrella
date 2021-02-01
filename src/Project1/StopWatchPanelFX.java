@@ -22,12 +22,15 @@ public class StopWatchPanelFX extends GridPane {
     private Button startButton, stopButton, loadButton, saveButton, addButton, newButton, continueButton;
     private TextField minField, secField, addField, newField;
 
+
+
     Label lblTime;
 
     public StopWatchPanelFX() {
 
         watch = new StopWatch();
         javaTimer = new Timer(8, new TimerListener());
+        FileChooser fileChooser = new FileChooser();
 
         minField = new TextField("0");
         add(minField, 0, 0);
@@ -76,6 +79,16 @@ public class StopWatchPanelFX extends GridPane {
         // register the listeners
         stopButton.setOnAction(this::actionPerformed);
         startButton.setOnAction(this::actionPerformed);
+        saveButton.setOnAction(this::actionPerformed);
+        loadButton.setOnAction(e -> {
+            File selectedFile = fileChooser.showOpenDialog(this);
+            StopWatch.load(selectedFile.getName());
+        });
+
+
+        addButton.setOnAction(this::actionPerformed);
+        newButton.setOnAction(this::actionPerformed);
+        continueButton.setOnAction(this::actionPerformed);
     }
 
     public void actionPerformed(ActionEvent event) {
@@ -84,6 +97,26 @@ public class StopWatchPanelFX extends GridPane {
 
         if (event.getSource() == stopButton) {
             javaTimer.stop();
+        }
+
+        if(event.getSource() == loadButton) {
+        //use file chooser
+        }
+
+        if(event.getSource() == saveButton) {
+            //use file chooser
+        }
+
+        if(event.getSource() == addButton) {
+            //place holder
+        }
+
+        if(event.getSource() == newButton) {
+            //place holder
+        }
+
+        if(event.getSource() == continueButton) {
+            //place holder
         }
 
         if (event.getSource() == startButton) {

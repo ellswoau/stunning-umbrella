@@ -437,10 +437,11 @@ public class TestStopWatch {
 		assertEquals("0:00:009", s.toString());
 	}
 
+	//ALL TEST CATEGORIES STILL NEED SUSPEND TESTING******************************************************************************
+
 	//Add milliseconds Tests
-	//TO DO: MAKE SUSPEND CHECKERS!!*******************************************************************************
 	@Test
-	public void testAdd0(){
+	public void testAddInt0(){
 		StopWatch s = new StopWatch (0,0,0);
 		s.add(0);
 		assertEquals(0, s.getMinutes());
@@ -449,7 +450,7 @@ public class TestStopWatch {
 	}
 
 	@Test
-	public void testAdd1Milli(){
+	public void testAddInt1Milli(){
 		StopWatch s = new StopWatch(0,0,0);
 		s.add(1);
 		assertEquals(0, s.getMinutes());
@@ -458,7 +459,7 @@ public class TestStopWatch {
 	}
 
 	@Test
-	public void testAddBigMilli(){
+	public void testAddIntBigMilli(){
 		StopWatch s = new StopWatch(0,0,0);
 		s.add(999);
 		assertEquals(0, s.getMinutes());
@@ -467,7 +468,7 @@ public class TestStopWatch {
 	}
 
 	@Test
-	public void testAdd1Second(){
+	public void testAddInt1Second(){
 		StopWatch s = new StopWatch(0,0,0);
 		s.add(1000);
 		assertEquals(0, s.getMinutes());
@@ -476,7 +477,7 @@ public class TestStopWatch {
 	}
 
 	@Test
-	public void testAddBigSeconds(){
+	public void testAddIntBigSeconds(){
 		StopWatch s = new StopWatch(0, 0, 0);
 		s.add(59000);
 		assertEquals(0, s.getMinutes());
@@ -485,7 +486,7 @@ public class TestStopWatch {
 	}
 
 	@Test
-	public void testAdd1Minute(){
+	public void testAddInt1Minute(){
 		StopWatch s = new StopWatch(0,0,0);
 		s.add(60000);
 		assertEquals(1, s.getMinutes());
@@ -494,7 +495,7 @@ public class TestStopWatch {
 	}
 
 	@Test
-	public void testAddMilliEvenRollover(){
+	public void testAddIntMilliEvenRollover(){
 		StopWatch s = new StopWatch(0, 1, 980);
 		s.add(20);
 		assertEquals(0, s.getMinutes());
@@ -503,7 +504,7 @@ public class TestStopWatch {
 	}
 
 	@Test
-	public void testAddMilliRemainsRollover(){
+	public void testAddIntMilliRemainsRollover(){
 		StopWatch s = new StopWatch(0, 1, 989);
 		s.add(20);
 		assertEquals(0, s.getMinutes());
@@ -512,7 +513,7 @@ public class TestStopWatch {
 	}
 
 	@Test
-	public void testAddSecondEvenRollover(){
+	public void testAddIntSecondEvenRollover(){
 		StopWatch s = new StopWatch (1, 10, 30);
 		s.add(50000);
 		assertEquals(2, s.getMinutes());
@@ -521,7 +522,7 @@ public class TestStopWatch {
 	}
 
 	@Test
-	public void testAddSecondRemainsRollover(){
+	public void testAddIntSecondRemainsRollover(){
 		StopWatch s = new StopWatch(1,13, 10);
 		s.add(50000);
 		assertEquals(2, s.getMinutes());
@@ -529,30 +530,362 @@ public class TestStopWatch {
 		assertEquals(10, s.getMilliseconds());
 	}
 
+	@Test
+	public void testAddIntCascadeRollover(){
+		StopWatch s = new StopWatch(5,59,950);
+		s.add(1055);
+		assertEquals(6, s.getMinutes());
+		assertEquals(1, s.getSeconds());
+		assertEquals(5, s.getMilliseconds());
+	}
+
 	@Test (expected = IllegalArgumentException.class)
-	public void testAddNegInput(){
+	public void testAddIntNegInput(){
 		StopWatch s = new StopWatch(2,3,4);
 		s.add(-5);
 	}
 
-//	@Test
-//	public void testAddMethod () {
-//		StopWatch s1 = new StopWatch(5,59,300);
-//		s1.add(2000);
-//		assertEquals (s1.toString(),"6:01:300");
-//
-//		s1 = new StopWatch(5,59,300);
-//		StopWatch s2 = new StopWatch(2,2,300);
-//		s1.add(s2);
-//		System.out.println (s1);
-//		assertEquals (s1.toString(),"8:01:600");
-//
-//		for (int i = 0; i < 15000; i++)
-//			s1.inc();
-//		System.out.println (s1);
-//		assertEquals (s1.toString(),"8:16:600");
-//	}
-//
+	//Add Stopwatch tests
+	@Test
+	public void testAddStopWatch0(){
+		StopWatch s1 = new StopWatch(0,0,0);
+		StopWatch s2 = new StopWatch(0,0,0);
+		s1.add(s2);
+		assertEquals(0, s1.getMinutes());
+		assertEquals(0,s1.getSeconds());
+		assertEquals(0, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testAddStopWatch1Milli(){
+		StopWatch s1 = new StopWatch(0,0,0);
+		StopWatch s2 = new StopWatch(0,0,1);
+		s1.add(s2);
+		assertEquals(0, s1.getMinutes());
+		assertEquals(0, s1.getSeconds());
+		assertEquals(1, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testAddStopWatchBigMilli(){
+		StopWatch s1 = new StopWatch(0,0,0);
+		StopWatch s2 = new StopWatch(0,0,999);
+		s1.add(s2);
+		assertEquals(0,s1.getMinutes());
+		assertEquals(0, s1.getSeconds());
+		assertEquals(999, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testAddStopWatch1Second(){
+		StopWatch s1 = new StopWatch(0,0,0);
+		StopWatch s2 = new StopWatch(0, 1, 0);
+		s1.add(s2);
+		assertEquals(0, s1.getMinutes());
+		assertEquals(1, s1.getSeconds());
+		assertEquals(0, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testAddStopWatchBigSecond(){
+		StopWatch s1 = new StopWatch (0,0,0);
+		StopWatch s2 = new StopWatch(0, 59, 0);
+		s1.add(s2);
+		assertEquals(0, s1.getMinutes());
+		assertEquals(59, s1.getSeconds());
+		assertEquals(0, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testAddStopWatch1Minute(){
+		StopWatch s1 = new StopWatch(0,0,0);
+		StopWatch s2 = new StopWatch (1, 0, 0);
+		s1.add(s2);
+		assertEquals(1, s1.getMinutes());
+		assertEquals(0, s1.getSeconds());
+		assertEquals(0, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testAddStopWatchMilliEvenRollover(){
+		StopWatch s1 = new StopWatch(3,2,500);
+		StopWatch s2 = new StopWatch(0,0,500);
+		s1.add(s2);
+		assertEquals(3, s1.getMinutes());
+		assertEquals(3, s1.getSeconds());
+		assertEquals(0, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testAddStopWatchMilliRemainsRollover(){
+		StopWatch s1 = new StopWatch(3,2,550);
+		StopWatch s2 = new StopWatch(0,0,500);
+		s1.add(s2);
+		assertEquals(3, s1.getMinutes());
+		assertEquals(3, s1.getSeconds());
+		assertEquals(50, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testAddStopWatchSecondEvenRollover(){
+		StopWatch s1 = new StopWatch(3, 50, 100);
+		StopWatch s2 = new StopWatch(0, 10, 0);
+		s1.add(s2);
+		assertEquals(4, s1.getMinutes());
+		assertEquals(0, s1.getSeconds());
+		assertEquals(100, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testAddStopWatchSecondRemainsRollover(){
+		StopWatch s1 = new StopWatch(3, 55, 100);
+		StopWatch s2 = new StopWatch(0, 10, 0);
+		s1.add(s2);
+		assertEquals(4, s1.getMinutes());
+		assertEquals(5, s1.getSeconds());
+		assertEquals(100, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testAddStopWatchAllChange(){
+		StopWatch s1 = new StopWatch(3, 55, 950);
+		StopWatch s2 = new StopWatch(2, 11, 100);
+		s1.add(s2);
+		assertEquals(6, s1.getMinutes());
+		assertEquals(7, s1.getSeconds());
+		assertEquals(50, s1.getMilliseconds());
+	}
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testAddStopWatchNullInput(){
+		StopWatch s1 = new StopWatch(5, 3, 5);
+		StopWatch s2 = null;
+		s1.add(s2);
+	}
+
+	// Sub Int tests
+	@Test
+	public void testSubInt0(){
+		StopWatch s = new StopWatch(2,4,5);
+		s.sub(0);
+		assertEquals(2, s.getMinutes());
+		assertEquals(4, s.getSeconds());
+		assertEquals(5, s.getMilliseconds());
+	}
+
+	@Test
+	public void testSubInt1Milli(){
+		StopWatch s = new StopWatch(2,5,1);
+		s.sub(1);
+		assertEquals(2, s.getMinutes());
+		assertEquals(5, s.getSeconds());
+		assertEquals(0, s.getMilliseconds());
+	}
+
+	@Test
+	public void testSubInt1Second(){
+		StopWatch s = new StopWatch(2, 1, 4);
+		s.sub(1000);
+		assertEquals(2, s.getMinutes());
+		assertEquals(0, s.getSeconds());
+		assertEquals(4, s.getMilliseconds());
+	}
+
+	@Test
+	public void testSubInt1Minute(){
+		StopWatch s = new StopWatch(1,5,4);
+		s.sub(60000);
+		assertEquals(0,s.getMinutes());
+		assertEquals(5, s.getSeconds());
+		assertEquals(4, s.getMilliseconds());
+	}
+
+	@Test
+	public void testSubIntMilliRollover(){
+		StopWatch s = new StopWatch(3, 3, 50);
+		s.sub(51);
+		assertEquals(3, s.getMinutes());
+		assertEquals(2, s.getSeconds());
+		assertEquals(999, s.getMilliseconds());
+	}
+
+	@Test
+	public void testSubIntSecondRollover(){
+		StopWatch s = new StopWatch(3, 1, 50);
+		s.sub(2000);
+		assertEquals(2, s.getMinutes());
+		assertEquals(59, s.getSeconds());
+		assertEquals(50, s.getMilliseconds());
+	}
+
+	@Test
+	public void testSubIntDoubleRollover(){
+		StopWatch s = new StopWatch(3, 2, 50);
+		s.sub(2051);
+		assertEquals(2, s.getMinutes());
+		assertEquals(59, s.getSeconds());
+		assertEquals(999, s.getMilliseconds());
+	}
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testSubIntNegInput(){
+		StopWatch s = new StopWatch(5,3,5);
+		s.sub(-5);
+	}
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testSubIntNegResult(){
+		StopWatch s = new StopWatch (0,4,50);
+		s.sub(4051);
+	}
+
+	//sub StopWatch tests
+	@Test
+	public void testSubStopWatch0(){
+		StopWatch s1 = new StopWatch(0,0,0);
+		StopWatch s2 = new StopWatch(0,0,0);
+		s1.sub(s2);
+		assertEquals(0, s1.getMinutes());
+		assertEquals(0, s1.getSeconds());
+		assertEquals(0, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testSubStopWatch1Milli(){
+		StopWatch s1 = new StopWatch(5,4,3);
+		StopWatch s2 = new StopWatch(0,0,1);
+		s1.sub(s2);
+		assertEquals(5, s1.getMinutes());
+		assertEquals(4, s1.getSeconds());
+		assertEquals(2, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testSubStopWatch1Second(){
+		StopWatch s1 = new StopWatch(5,4,2);
+		StopWatch s2 = new StopWatch(0,1,0);
+		s1.sub(s2);
+		assertEquals(5, s1.getMinutes());
+		assertEquals(3, s1.getSeconds());
+		assertEquals(2, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testSubStopWatch1Minute(){
+		StopWatch s1 = new StopWatch(6, 4, 3);
+		StopWatch s2 = new StopWatch(1, 0,0);
+		s1.sub(s2);
+		assertEquals(5, s1.getMinutes());
+		assertEquals(4, s1.getSeconds());
+		assertEquals(3, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testSubStopWatchMilliRollover(){
+		StopWatch s1 = new StopWatch(5,5,300);
+		StopWatch s2 = new StopWatch(0, 0,301);
+		s1.sub(s2);
+		assertEquals(5, s1.getMinutes());
+		assertEquals(4, s1.getSeconds());
+		assertEquals(999, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testSubStopWatchSecondRollover(){
+		StopWatch s1 = new StopWatch(5, 5, 300);
+		StopWatch s2 = new StopWatch(0, 6, 0);
+		s1.sub(s2);
+		assertEquals(4, s1.getMinutes());
+		assertEquals(59, s1.getSeconds());
+		assertEquals(300, s1.getMilliseconds());
+	}
+
+	@Test
+	public void testSubStopWatchDoubleRollover(){
+		StopWatch s1 = new StopWatch(4, 50, 300);
+		StopWatch s2 = new StopWatch(0, 50, 301);
+		s1.sub(s2);
+		assertEquals(3, s1.getMinutes());
+		assertEquals(59, s1.getSeconds());
+		assertEquals(999, s1.getMilliseconds());
+	}
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testSubStopWatchNullInput(){
+		StopWatch s1 = new StopWatch(3, 2, 1);
+		StopWatch s2 = null;
+		s1.sub(s2);
+	}
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testSubStopWatchBiggerInput(){
+		StopWatch s1 = new StopWatch(3,2,1);
+		StopWatch s2 = new StopWatch(3,2,2);
+		s1.sub(s2);
+	}
+
+	//Inc Tests
+	@Test
+	public void testInc(){
+		StopWatch s = new StopWatch(0,0,0);
+		s.inc();
+		assertEquals(0,s.getMinutes());
+		assertEquals(0, s.getSeconds());
+		assertEquals(1, s.getMilliseconds());
+	}
+
+	@Test
+	public void testIncMilliRollover(){
+		StopWatch s = new StopWatch(0,0,999);
+		s.inc();
+		assertEquals(0, s.getMinutes());
+		assertEquals(1, s.getSeconds());
+		assertEquals(0, s.getMilliseconds());
+	}
+
+	@Test
+	public void testIncDoubleRollover(){
+		StopWatch s = new StopWatch(0, 59, 999);
+		s.inc();
+		assertEquals(1, s.getMinutes());
+		assertEquals(0, s.getSeconds());
+		assertEquals(0, s.getMilliseconds());
+	}
+
+	//Dec Tests
+	@Test
+	public void testDec(){
+		StopWatch s = new StopWatch(6,5,4);
+		s.dec();
+		assertEquals(6, s.getMinutes());
+		assertEquals(5, s.getSeconds());
+		assertEquals(3, s.getMilliseconds());
+	}
+
+	@Test
+	public void testDecSecondRollover(){
+		StopWatch s = new StopWatch(1,5,0);
+		s.dec();
+		assertEquals(1, s.getMinutes());
+		assertEquals(4, s.getSeconds());
+		assertEquals(999, s.getMilliseconds());
+	}
+
+	@Test
+	public void testDecDoubleRollover(){
+		StopWatch s = new StopWatch(5,0,0);
+		s.dec();
+		assertEquals(4, s.getMinutes());
+		assertEquals(59, s.getSeconds());
+		assertEquals(999, s.getMilliseconds());
+	}
+
+	@Test (expected = IllegalArgumentException.class)
+	public void testDecNegResult(){
+		StopWatch s = new StopWatch(0,0,0);
+		s.dec();
+	}
+
 //	@Test
 //	public void testLoadSave () {
 //		StopWatch s1 = new StopWatch(5,59,300);

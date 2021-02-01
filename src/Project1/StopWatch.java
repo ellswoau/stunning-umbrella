@@ -20,9 +20,6 @@ public class StopWatch  {
 	private int seconds;
 	private int milliseconds;
 
-	private StopWatch stopWatch, stopWatch1, stopWatch2;
-	private Object other;
-
 	private static boolean suspend = false;
 
 
@@ -297,6 +294,9 @@ public class StopWatch  {
 	public void dec() {
 		int tmpMilliseconds = convertToMilli(this);
 		tmpMilliseconds--;
+
+		if (tmpMilliseconds < 0)
+			throw new IllegalArgumentException();
 
 		minutes = tmpMilliseconds / 60000;
 		tmpMilliseconds %= 60000;

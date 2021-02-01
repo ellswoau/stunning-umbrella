@@ -81,8 +81,8 @@ public class StopWatchPanelFX extends GridPane {
         startButton.setOnAction(this::actionPerformed);
         saveButton.setOnAction(this::actionPerformed);
         loadButton.setOnAction(e -> {
-            File selectedFile = fileChooser.showOpenDialog(this);
-            StopWatch.load(selectedFile.getName());
+            File selectedFile = fileChooser.showOpenDialog(null);
+            watch.load(selectedFile.getName());
         });
 
 

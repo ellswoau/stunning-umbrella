@@ -207,19 +207,6 @@ public class StopWatch  {
 	}
 
 	/*****************************************************************
-	 * Method that converts an integer input of milliseconds and converts
-	 * it into a stopwatch.
-	 *****************************************************************/
-	private void convertToStopWatch (int tempMilliseconds) {
-		minutes = tempMilliseconds / 60000;
-		tempMilliseconds %= 60000;
-
-		seconds = tempMilliseconds / 1000;
-		tempMilliseconds %= 1000;
-		milliseconds = tempMilliseconds;
-	}
-
-	/*****************************************************************
 	 * Method uses for loop to run inc method n (milliseconds) number
 	 * of times.
 	 *****************************************************************/
@@ -359,14 +346,15 @@ public class StopWatch  {
 		try {
 			out = new PrintWriter(new BufferedWriter(new FileWriter(filename)));
 
-			System.out.println(minutes);
-			System.out.println(seconds);
-			System.out.println(milliseconds);
+			out.println(minutes);
+			out.println(seconds);
+			out.println(milliseconds);
 
 			out.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
+			throw new IllegalArgumentException();
 		}
 
 	}
@@ -379,17 +367,24 @@ public class StopWatch  {
 		if (filename == null)
 			throw new IllegalArgumentException();
 
+		int minutes;
+		int seconds;
+		int milliseconds;
+
 		Scanner scanner = null;
 		try {
 			scanner = new Scanner(new File(filename));
-			int minutes = scanner.nextInt();
-			int seconds = scanner.nextInt();
-			int milliseconds = scanner.nextInt();
+			minutes = scanner.nextInt();
+			seconds = scanner.nextInt();
+			milliseconds = scanner.nextInt();
 
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException();
 		}
 
+		this.minutes = minutes;
+		this.seconds = seconds;
+		this.milliseconds = milliseconds;
 	}
 
 	/*****************************************************************

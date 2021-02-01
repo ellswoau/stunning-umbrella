@@ -224,11 +224,13 @@ public class StopWatch  {
 	 * of times.
 	 *****************************************************************/
 	public void add(int milliseconds) {
-		if (milliseconds < 0)
-			throw new IllegalArgumentException();
-		if (!suspend) {
-			for (int i = 0; i < milliseconds; i++) {
-				this.inc();
+		if (!isSuspended()) {
+			if (milliseconds < 0)
+				throw new IllegalArgumentException();
+			if (!suspend) {
+				for (int i = 0; i < milliseconds; i++) {
+					this.inc();
+				}
 			}
 		}
 	}
@@ -237,10 +239,12 @@ public class StopWatch  {
 	 * of times.
 	 *****************************************************************/
 	public void sub(int milliseconds) {
-		if (milliseconds < 0)
-			throw new IllegalArgumentException();
-		for (int i = 0; i < milliseconds; i++) {
-			this.dec();
+		if (!isSuspended()) {
+			if (milliseconds < 0)
+				throw new IllegalArgumentException();
+			for (int i = 0; i < milliseconds; i++) {
+				this.dec();
+			}
 		}
 
 	}
@@ -251,9 +255,11 @@ public class StopWatch  {
 	 * object to milliseconds then loops the inc method
 	 *****************************************************************/
 	public void add(StopWatch stopWatch) {
-		int tmpMilliseconds = convertToMilli(stopWatch);
-		for (int i = 0; i < tmpMilliseconds; i++){
-			this.inc();
+		if (!isSuspended()) {
+			int tmpMilliseconds = convertToMilli(stopWatch);
+			for (int i = 0; i < tmpMilliseconds; i++) {
+				this.inc();
+			}
 		}
 
 	}
@@ -263,11 +269,13 @@ public class StopWatch  {
 	 * stopwatch to milliseconds then loops the dec method
 	 *****************************************************************/
 	public void sub(StopWatch stopWatch) {
-		int tmpMilliseconds = convertToMilli(stopWatch);
-		for (int i = 0; i < tmpMilliseconds; i++){
-			this.dec();
-		}
+		if (!isSuspended()) {
+			int tmpMilliseconds = convertToMilli(stopWatch);
+			for (int i = 0; i < tmpMilliseconds; i++) {
+				this.dec();
+			}
 
+		}
 	}
 
 	/*****************************************************************
@@ -276,14 +284,16 @@ public class StopWatch  {
 	 * variables.
 	 *****************************************************************/
 	public void inc() {
-		int tmpMilliseconds = convertToMilli(this);
-		tmpMilliseconds++;
+		if (!isSuspended()) {
+			int tmpMilliseconds = convertToMilli(this);
+			tmpMilliseconds++;
 
-		this.minutes = tmpMilliseconds / 60000;
-		tmpMilliseconds %= 60000;
-		this.seconds = tmpMilliseconds / 1000;
-		tmpMilliseconds %= 1000;
-		this.milliseconds = tmpMilliseconds;
+			this.minutes = tmpMilliseconds / 60000;
+			tmpMilliseconds %= 60000;
+			this.seconds = tmpMilliseconds / 1000;
+			tmpMilliseconds %= 1000;
+			this.milliseconds = tmpMilliseconds;
+		}
 	}
 
 	/*****************************************************************
@@ -292,17 +302,19 @@ public class StopWatch  {
 	 * object variables.
 	 *****************************************************************/
 	public void dec() {
-		int tmpMilliseconds = convertToMilli(this);
-		tmpMilliseconds--;
+		if (!isSuspended()) {
+			int tmpMilliseconds = convertToMilli(this);
+			tmpMilliseconds--;
 
-		if (tmpMilliseconds < 0)
-			throw new IllegalArgumentException();
+			if (tmpMilliseconds < 0)
+				throw new IllegalArgumentException();
 
-		minutes = tmpMilliseconds / 60000;
-		tmpMilliseconds %= 60000;
-		seconds = tmpMilliseconds / 1000;
-		tmpMilliseconds %= 1000;
-		milliseconds = tmpMilliseconds;
+			minutes = tmpMilliseconds / 60000;
+			tmpMilliseconds %= 60000;
+			seconds = tmpMilliseconds / 1000;
+			tmpMilliseconds %= 1000;
+			milliseconds = tmpMilliseconds;
+		}
 	}
 
 	/*****************************************************************
@@ -381,18 +393,27 @@ public class StopWatch  {
 	}
 
 	/*****************************************************************
-	 *UNKNOWN
+	 * Method that sets the stopwatch suspend status
 	 *****************************************************************/
-	public static void setSuspend(boolean suspend) {
-		//TO DO: finish logic
+	public static void setSuspend(boolean tmpSuspend) {
+	if (tmpSuspend) {
+		suspend = true;
+		}
+	if (!tmpSuspend) {
+		suspend = false;
+		}
 	}
 
 	/*****************************************************************
-	 *UNKNOWN
+	 * Method to check if stopwatch is suspended.
 	 *****************************************************************/
 	public static boolean isSuspended() {
-		//TO DO: finish logic
-		return false; // place holder
+		if (suspend) {
+		return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	/*****************************************************************

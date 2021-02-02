@@ -19,18 +19,21 @@ public class StopWatchPanelFX extends GridPane {
     private StopWatch watch;
     private Timer javaTimer;
 
-    private Button startButton, stopButton, loadButton, saveButton, addButton, newButton, continueButton;
-    private TextField minField, secField, addField, newField;
+    private Button startButton, stopButton, loadButton, saveButton, addButton, subtractButton, newButton, continueButton;
+    private TextField minField, secField, addField, subtractField, newField;
 
 
 
     Label lblTime;
 
+    /*****************************************************************
+     *  Constructor for each stopwatch panel, instantiates variables
+     *  and listeners and element positions within the panel
+     *****************************************************************/
     public StopWatchPanelFX() {
 
         watch = new StopWatch();
         javaTimer = new Timer(8, new TimerListener());
-        FileChooser fileChooser = new FileChooser();
 
         minField = new TextField("0");
         add(minField, 0, 0);
@@ -43,8 +46,11 @@ public class StopWatchPanelFX extends GridPane {
         addField = new TextField("0");
         add(addField, 1, 5);
 
-        newField = new TextField("0");
-        add(newField, 1, 6);
+        subtractField = new TextField("0");
+        add(subtractField, 1, 6);
+
+        newField = new TextField("0:00:00");
+        add(newField, 1, 7);
 
 
         stopButton = new Button("Stop");
@@ -56,8 +62,11 @@ public class StopWatchPanelFX extends GridPane {
         addButton = new Button("Add");
         add(addButton, 0, 5);
 
+        subtractButton = new Button("Subtract");
+        add(subtractButton, 0, 6);
+
         newButton = new Button("New");
-        add(newButton, 0, 6);
+        add(newButton, 0, 7);
 
         continueButton = new Button("Continue");
         add(continueButton, 0, 7);
@@ -80,10 +89,7 @@ public class StopWatchPanelFX extends GridPane {
         stopButton.setOnAction(this::actionPerformed);
         startButton.setOnAction(this::actionPerformed);
         saveButton.setOnAction(this::actionPerformed);
-        loadButton.setOnAction(e -> {
-            File selectedFile = fileChooser.showOpenDialog(null);
-            watch.load(selectedFile.getName());
-        });
+        loadButton.setOnAction(this::actionPerformed);
 
 
         addButton.setOnAction(this::actionPerformed);
@@ -91,25 +97,75 @@ public class StopWatchPanelFX extends GridPane {
         continueButton.setOnAction(this::actionPerformed);
     }
 
+    /*****************************************************************
+     * Action method that executes different actions based on what
+     * element is being interacted with.
+     *****************************************************************/
     public void actionPerformed(ActionEvent event) {
 
         int mins, sec, milli, p;
+        FileChooser fileChooser = new FileChooser();
+
 
         if (event.getSource() == stopButton) {
             javaTimer.stop();
         }
 
         if(event.getSource() == loadButton) {
-        //use file chooser
+        //uses file chooser for an open dialog and calls the load method
+            try {
+                File selectedFile = fileChooser.showOpenDialog(null);
+                watch.load(selectedFile.getName());
+            }
+            catch (Exception e) {
+                errorMessageDialog("File selection error");
+            }
         }
 
         if(event.getSource() == saveButton) {
-            //use file chooser
+            //uses file chooser, sets default file name, and catches any exceptions
+            //calls the save method
+            try {
+                fileChooser.setInitialFileName("stopwatch-default.txt");
+                fileChooser.setTitle("Save StopWatch");
+                File selectedFile = fileChooser.showSaveDialog(null);
+                watch.save(selectedFile.getName());
+            }
+            catch (Exception e) {
+                errorMessageDialog("File save error");
+            }
         }
 
+        //action performed when add button is clicked, adds the entered
+        //num of milliseconds using the add() method
         if(event.getSource() == addButton) {
-            //place holder
+            try {
+                milli = Integer.parseInt(addField.getText());
+                watch.add(milli);
+                javaTimer.start();
+            } catch (NumberFormatException io) {
+                errorMessageDialog("Number Format exception");
+            } catch (IllegalArgumentException e) {
+                errorMessageDialog("Number Format exception");
+            }
         }
+
+        //action performed when subtract button clicked, uses the
+        // stopwatch sub() method
+        if(event.getSource() == subtractButton) {
+
+            try {
+                milli = Integer.parseInt(subtractField.getText());
+                watch.sub(milli);
+                javaTimer.start();
+            } catch (NumberFormatException io) {
+                errorMessageDialog("Number Format exception");
+            } catch (IllegalArgumentException e) {
+                errorMessageDialog("Number Format exception");
+            }
+        }
+
+
 
         if(event.getSource() == newButton) {
             //place holder
@@ -129,7 +185,8 @@ public class StopWatchPanelFX extends GridPane {
                 errorMessageDialog("Number Format exception");
             } catch (IllegalArgumentException e) {
                 errorMessageDialog("Number Format exception");
-            }
+
+        }
         }
 
 
@@ -137,6 +194,11 @@ public class StopWatchPanelFX extends GridPane {
         lblTime.setText(watch.toString());
     }
 
+    /*****************************************************************
+     * Method that displays an error message dialog box and takes a
+     * string input from the error message in the action performed
+     * method
+     *****************************************************************/
     private void errorMessageDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initStyle(StageStyle.UTILITY);
@@ -147,6 +209,9 @@ public class StopWatchPanelFX extends GridPane {
     }
 
 
+    /*****************************************************************
+     * Timer listener
+     *****************************************************************/
     private class TimerListener implements ActionListener {
         @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {

@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 
 /**********************************
@@ -50,8 +51,24 @@ public class StopWatchGUIFX extends Application {
         primaryStage.show();
     }
 
+    /*****************************************************************
+     * Action listener used for suspend button, which toggles suspend
+     * based on current state and also updates the buttons text to inform
+     * the user of current status.
+     *****************************************************************/
     private void actionPerformed(javafx.event.ActionEvent actionEvent) {
 
+        if (actionEvent.getSource() == susButton) {
+            if (!StopWatch.isSuspended()) {
+                StopWatch.setSuspend(true);
+                susButton.setText("Suspend is ON");
+            }
+            else {
+                StopWatch.setSuspend(false);
+                susButton.setText("Suspend is OFF");
+
+            }
+        }
     }
     public static void main(String[] args) {
         launch(args);

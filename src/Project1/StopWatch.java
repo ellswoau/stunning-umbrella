@@ -4,20 +4,23 @@ import java.io.*;
 import java.util.Scanner;
 
 /*****************************************************************
- ********   class description...
+ ********
  *
- * THIS IS JUST STARTING CODE, MUCH HAS TO BE CHANGED.
+ * A set of methods that create and manipulate a stopwatch
  *
  * @author Austin Ellsworth & Kit Bazner
- * @version 01/25/2021
+ * @version 02/02/2021
  */
 
 public class StopWatch  {
 
 
 	// private variables to hold stopwatch time
+	/**Current minutes on stopwatch*/
 	private int minutes;
+	/**Current seconds on stopwatch*/
 	private int seconds;
+	/**Current milliseconds on stopwatch*/
 	private int milliseconds;
 
 	private static boolean suspend = false;
@@ -34,7 +37,6 @@ public class StopWatch  {
 	}
 
 	/******************************************************************
-	 *
 	 *  A constructor that accepts a string as a parameter with the
 	 *  following format: "1:21:300"� where 1 indicates minutes, 21
 	 *  indicates seconds,  and 300 indicates milliseconds.  OR
@@ -81,11 +83,14 @@ public class StopWatch  {
 	}
 
 	/*****************************************************************
-	 *Constructor for stopwatch object using integer inputs for minutes
+	 * Constructor for stopwatch object using integer inputs for minutes
 	 * seconds and milliseconds
+	 *
 	 * @param minutes an integer representing the number of minutes the stopwatch will start with
 	 * @param seconds an integer representing the number of seconds the stopwatch will start with
 	 * @param milliseconds an integer representing the number of milliseconds the stopwatch will start with
+	 * @throws IllegalArgumentException throws when parameters are negative, seconds are above 59,
+	 * or milliseconds are above 999
 	 *****************************************************************/
 	public StopWatch(int minutes, int seconds, int milliseconds) {
 		if (minutes < 0) {
@@ -106,6 +111,7 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Construct for stopwatch object using seconds and milliseconds
+	 *
 	 * @param seconds an integer representing the number of seconds the stopwatch will start with
 	 * @param milliseconds an integer representing the number of milliseconds the stopwatch will start with
 	 *****************************************************************/
@@ -122,6 +128,7 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Constructor for stopwatch object using only milliseconds
+	 *
 	 * @param milliseconds an integer representing the number of milliseconds the stopwatch will start with
 	 *****************************************************************/
 	public StopWatch(int milliseconds) {
@@ -136,8 +143,8 @@ public class StopWatch  {
 
 	/******************************************************************
 	 * Constructor for stopwatch object using another stopwatch object
-	 * @param stopWatch a stopwatch object to construct new stopwatch
 	 *
+	 * @param stopWatch a stopwatch object to construct new stopwatch
 	 * @throws IllegalArgumentException thrown when given parameter is null
 	 ******************************************************************/
 	public StopWatch(StopWatch stopWatch) {
@@ -151,9 +158,9 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Equals method that compares stopwatches by calling getters
+	 *
 	 * @param stopWatch1 a stopwatch object to be compared
 	 * @param stopWatch2 a second stopwatch object to be compared
-	 *
 	 * @throws IllegalArgumentException thrown when parameters are null
 	 *****************************************************************/
 	//needs testing
@@ -166,8 +173,8 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Method that compares stopwatch objects using instanceof
-	 * @param other an object that is to be compared with stopwatch
 	 *
+	 * @param other an object that is to be compared with stopwatch
 	 * @throws IllegalArgumentException throws when other is null or not an instance of stopwatch
 	 *****************************************************************/
 	public boolean equals(Object other) {
@@ -186,8 +193,8 @@ public class StopWatch  {
 	 * A method that returns 1 if “this” StopWatch object is greater than the other StopWatch object;
 	 * returns -1 if the “this” StopWatch object is less than the other StopWatch;
 	 * returns 0 if the “this” StopWatch object is equal to the other StopWatch object
-	 * @param other a stopwatch to compare to current stopwatch
 	 *
+	 * @param other a stopwatch to compare to current stopwatch
 	 * @throws IllegalArgumentException throws when other is null
 	 *****************************************************************/
 	//needs testing
@@ -216,8 +223,8 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Method that converts StopWatch object to milliseconds.
-	 * @param stopWatch a stopwatch object to convert to milliseconds
 	 *
+	 * @param stopWatch a stopwatch object to convert to milliseconds
 	 * @throws IllegalArgumentException throws when stopwatch is null
 	 *****************************************************************/
 	private static int convertToMilli (StopWatch stopWatch) {
@@ -235,8 +242,8 @@ public class StopWatch  {
 	/*****************************************************************
 	 * Method uses for loop to run inc method n (milliseconds) number
 	 * of times.
-	 * @param milliseconds the number of milliseconds to be added
 	 *
+	 * @param milliseconds the number of milliseconds to be added
 	 * @throws IllegalArgumentException  throws when milliseconds are negative
 	 *****************************************************************/
 	public void add(int milliseconds) {
@@ -253,8 +260,8 @@ public class StopWatch  {
 	/*****************************************************************
 	 * Method uses for loop to run dec method n (milliseconds) number
 	 * of times.
-	 * @param milliseconds the number of milliseconds to be subtracted
 	 *
+	 * @param milliseconds the number of milliseconds to be subtracted
 	 * @throws IllegalArgumentException throws when milliseconds are negative
 	 *****************************************************************/
 	public void sub(int milliseconds) {
@@ -272,8 +279,8 @@ public class StopWatch  {
 	/*****************************************************************
 	 * Method to add two stopwatches together, converts second stopwatch
 	 * object to milliseconds then loops the inc method
-	 * @param stopWatch a stopwatch object to add to
 	 *
+	 * @param stopWatch a stopwatch object to add to
 	 * @throws IllegalArgumentException throws when stopwatch is null
 	 *****************************************************************/
 	public void add(StopWatch stopWatch) {
@@ -291,6 +298,7 @@ public class StopWatch  {
 	/*****************************************************************
 	 * Method that subtracts stopwatch objects by converting the input
 	 * stopwatch to milliseconds then loops the dec method
+	 *
 	 * @param stopWatch is an input variable of a stopwatch object
 	 * used to subtract from the parent stopwatch object.
 	 * @throws IllegalArgumentException if the input variable object
@@ -313,7 +321,6 @@ public class StopWatch  {
 	 * Method that increases the StopWatch object by 1 millisecond.
 	 * Calls the convertToMilli method, adds one, then updates object
 	 * variables.
-	 *
 	 *****************************************************************/
 	public void inc() {
 		if (!isSuspended()) {
@@ -332,6 +339,7 @@ public class StopWatch  {
 	 * Method that decreases the StopWatch object by 1 millisecond.
 	 * Calls the convertToMilli method, subtracts one, then updates
 	 * object variables.
+	 *
 	 * @throws IllegalArgumentException if the milliseconds variable is
 	 * invalid, ie less than zero.
 	 *****************************************************************/
@@ -355,6 +363,7 @@ public class StopWatch  {
 	 * Method concatenates minutes, seconds, milliseconds variables into
 	 * temporary string variable and adds leading zeros based on the
 	 * values of seconds and milliseconds. Returns a string.
+	 *
 	 * @returns a string in MIN:SEC:MILLI/0:00:00 format for the
 	 * stopwatch object.
 	 *****************************************************************/
@@ -386,6 +395,7 @@ public class StopWatch  {
 	/*****************************************************************
 	 * Method that saves the current object using "out" and printing
 	 * each variable on a new line.
+	 *
 	 * @param filename used to set the name of the file that is saved
 	 * by the print writer.
 	 * @throws IllegalArgumentException if the name of the file is invalid
@@ -415,6 +425,7 @@ public class StopWatch  {
 	/*****************************************************************
 	 * Method that loads a stopwatch object and reads each variable
 	 * from the next line.
+	 *
 	 * @param filename is used to select the filename of the file loaded
 	 * into the scanner.
 	 * @throws IllegalArgumentException if the file cannot be found.
@@ -445,6 +456,7 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Method that sets the stopwatch suspend status
+	 *
 	 * @param tmpSuspend is the the boolean variable used to set the
 	 * suspend state of the stopwatch object to true or false.
 	 *****************************************************************/
@@ -459,6 +471,7 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Method to check if stopwatch is suspended.
+	 *
 	 * @returns a true/false boolean of the stopwatch's suspend state.
 	 *****************************************************************/
 	public static boolean isSuspended() {
@@ -472,6 +485,7 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Getter method for minutes
+	 *
 	 * @returns the minutes variable of the stopwatch object.
 	 *****************************************************************/
 	public int getMinutes() {
@@ -480,6 +494,7 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Setter method for minutes.
+	 *
 	 * @param minutes is the variable used by the method to set the minutes
 	 * of the stopwatch object.
 	 * @throws IllegalArgumentException if the number of minutes is
@@ -493,6 +508,7 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Getter method for seconds.
+	 *
 	 * @returns the seconds variable of the stopwatch object.
 	 *****************************************************************/
 	public int getSeconds() {
@@ -501,6 +517,7 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Setter method for seconds.
+	 *
 	 * @param seconds is the variable used by the method to set the
 	 * seconds variable of the stopwatch object.
 	 * @throws IllegalArgumentException if the seconds variable is
@@ -514,6 +531,7 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Getter method for milliseconds.
+	 *
 	 * @returns milliseconds of the stopwatch object.
 	 *****************************************************************/
 	public int getMilliseconds() {
@@ -522,6 +540,7 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Setter method for milliseconds.
+	 *
 	 * @param milliseconds variable used by the method to set
 	 * milli seconds on stopwatch.
 	 * @throws IllegalArgumentException if variable passed to method is

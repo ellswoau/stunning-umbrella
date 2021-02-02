@@ -20,7 +20,7 @@ public class StopWatchPanelFX extends GridPane {
     private Timer javaTimer;
 
     private Button startButton, stopButton, loadButton, saveButton, addButton, subtractButton, newButton, continueButton;
-    private TextField minField, secField, addField, subtractField, newField;
+    private TextField minField, secField, milliField, addField, subtractField, newField;
 
 
 
@@ -43,47 +43,51 @@ public class StopWatchPanelFX extends GridPane {
         add(new Label("Seconds:"), 0, 1);
         add(secField, 1, 1);
 
+        milliField = new TextField("0");
+        add(new Label("Milliseconds:"), 0, 2);
+        add(milliField, 1, 2);
+
         addField = new TextField("0");
-        add(addField, 1, 5);
+        add(addField, 1, 6);
 
         subtractField = new TextField("0");
-        add(subtractField, 1, 6);
+        add(subtractField, 1, 7);
 
         newField = new TextField("0:00:00");
-        add(newField, 1, 7);
+        add(newField, 1, 8);
 
 
         stopButton = new Button("Stop");
-        add(stopButton, 0, 3);
+        add(stopButton, 0, 4);
 
         loadButton = new Button("Load");
-        add(loadButton, 0, 4);
+        add(loadButton, 0, 5);
 
         addButton = new Button("Add");
-        add(addButton, 0, 5);
+        add(addButton, 0, 6);
 
         subtractButton = new Button("Subtract");
-        add(subtractButton, 0, 6);
+        add(subtractButton, 0, 7);
 
         newButton = new Button("New");
-        add(newButton, 0, 7);
+        add(newButton, 0, 8);
 
         continueButton = new Button("Continue");
-        add(continueButton, 0, 7);
+        add(continueButton, 0, 9);
 
         startButton = new Button("Start");
-        add(startButton, 1, 3);
+        add(startButton, 1, 4);
 
         saveButton = new Button("Save");
-        add(saveButton, 1, 4);
+        add(saveButton, 1, 5);
 
-        add(new Label(" "), 1, 7);
+        add(new Label(" "), 1, 8);
 
         lblTime = new Label();
         lblTime.setText(watch.toString());
-        add(lblTime, 0, 8);
+        add(lblTime, 1, 10);
 
-        add(new Label("Time:"), 1, 8);
+        add(new Label("Time:"), 0, 10);
 
         // register the listeners
         stopButton.setOnAction(this::actionPerformed);
@@ -141,7 +145,6 @@ public class StopWatchPanelFX extends GridPane {
             try {
                 milli = Integer.parseInt(addField.getText());
                 watch.add(milli);
-                javaTimer.start();
             } catch (NumberFormatException io) {
                 errorMessageDialog("Number Format exception");
             } catch (IllegalArgumentException e) {
@@ -156,7 +159,6 @@ public class StopWatchPanelFX extends GridPane {
             try {
                 milli = Integer.parseInt(subtractField.getText());
                 watch.sub(milli);
-                javaTimer.start();
             } catch (NumberFormatException io) {
                 errorMessageDialog("Number Format exception");
             } catch (IllegalArgumentException e) {
@@ -167,7 +169,16 @@ public class StopWatchPanelFX extends GridPane {
 
 
         if(event.getSource() == newButton) {
-            //place holder
+            //passed the string from newField to the stopWatch
+            //constructor that uses a string as input.
+            try {
+                watch = new StopWatch(newField.getText());
+            } catch (NumberFormatException io) {
+                errorMessageDialog("Number Format exception");
+            } catch (IllegalArgumentException e) {
+                errorMessageDialog("Number Format exception");
+
+            }
         }
 
         if(event.getSource() == continueButton) {
@@ -186,7 +197,8 @@ public class StopWatchPanelFX extends GridPane {
             try {
                 mins = Integer.parseInt(minField.getText());
                 sec = Integer.parseInt(secField.getText());
-                watch = new StopWatch(mins, sec, 0);
+                milli = Integer.parseInt(milliField.getText());
+                watch = new StopWatch(mins, sec, milli);
                 javaTimer.start();
             } catch (NumberFormatException io) {
                 errorMessageDialog("Number Format exception");

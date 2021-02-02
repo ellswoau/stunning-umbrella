@@ -47,11 +47,13 @@ public class StopWatchPanelFX extends GridPane {
         add(new Label("Milliseconds:"), 0, 2);
         add(milliField, 1, 2);
 
-        addField = new TextField("0");
+        addField = new TextField();
         add(addField, 1, 6);
+        addField.setPromptText("add millisec:");
 
-        subtractField = new TextField("0");
+        subtractField = new TextField();
         add(subtractField, 1, 7);
+        subtractField.setPromptText("subtract millisec:");
 
         newField = new TextField("0:00:00");
         add(newField, 1, 8);

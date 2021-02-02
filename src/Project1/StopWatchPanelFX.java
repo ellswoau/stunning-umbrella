@@ -36,12 +36,12 @@ public class StopWatchPanelFX extends GridPane {
         javaTimer = new Timer(8, new TimerListener());
 
         minField = new TextField("0");
-        add(minField, 0, 0);
-        add(new Label("Minutes:"), 1, 0);
+        add(new Label("Minutes:"), 0, 0);
+        add(minField, 1, 0);
 
         secField = new TextField("0");
-        add(secField, 0, 1);
-        add(new Label("Seconds:"), 1, 1);
+        add(new Label("Seconds:"), 0, 1);
+        add(secField, 1, 1);
 
         addField = new TextField("0");
         add(addField, 1, 5);
@@ -90,9 +90,8 @@ public class StopWatchPanelFX extends GridPane {
         startButton.setOnAction(this::actionPerformed);
         saveButton.setOnAction(this::actionPerformed);
         loadButton.setOnAction(this::actionPerformed);
-
-
         addButton.setOnAction(this::actionPerformed);
+        subtractButton.setOnAction(this::actionPerformed);
         newButton.setOnAction(this::actionPerformed);
         continueButton.setOnAction(this::actionPerformed);
     }

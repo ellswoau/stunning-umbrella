@@ -171,7 +171,15 @@ public class StopWatchPanelFX extends GridPane {
         }
 
         if(event.getSource() == continueButton) {
-            //place holder
+            //Starts the timer back up without resetting it back to the
+            //values provided in minutes and seconds fields above.
+            try {
+                javaTimer.start();
+            }
+            catch (Exception e) {
+                errorMessageDialog("Timer already running");
+            }
+
         }
 
         if (event.getSource() == startButton) {

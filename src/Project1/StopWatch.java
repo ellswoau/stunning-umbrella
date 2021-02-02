@@ -298,7 +298,7 @@ public class StopWatch  {
 	 *****************************************************************/
 	public void sub(StopWatch stopWatch) {
 		if (stopWatch == null) {
-			throw IllegalArgumentException();
+			throw new IllegalArgumentException();
 		}
 		if (!isSuspended()) {
 			int tmpMilliseconds = convertToMilli(stopWatch);

@@ -16,14 +16,10 @@ public class StopWatch  {
 
 
 	// private variables to hold stopwatch time
-	/**Current value of minutes*/
 	private int minutes;
-	/**Current value of seconds*/
 	private int seconds;
-	/**Current value of milliseconds*/
 	private int milliseconds;
 
-	/**Current state of suspend*/
 	private static boolean suspend = false;
 
 
@@ -194,6 +190,7 @@ public class StopWatch  {
 	 *
 	 * @throws IllegalArgumentException throws when other is null
 	 *****************************************************************/
+	//needs testing
 	public int compareTo(StopWatch other) {
 		if (other == null)
 			throw new IllegalArgumentException();
@@ -294,8 +291,15 @@ public class StopWatch  {
 	/*****************************************************************
 	 * Method that subtracts stopwatch objects by converting the input
 	 * stopwatch to milliseconds then loops the dec method
+	 * @param stopWatch is an input variable of a stopwatch object
+	 * used to subtract from the parent stopwatch object.
+	 * @throws IllegalArgumentException if the input variable object
+	 * is null.
 	 *****************************************************************/
 	public void sub(StopWatch stopWatch) {
+		if (stopWatch == null) {
+			throw IllegalArgumentException();
+		}
 		if (!isSuspended()) {
 			int tmpMilliseconds = convertToMilli(stopWatch);
 			for (int i = 0; i < tmpMilliseconds; i++) {
@@ -309,6 +313,7 @@ public class StopWatch  {
 	 * Method that increases the StopWatch object by 1 millisecond.
 	 * Calls the convertToMilli method, adds one, then updates object
 	 * variables.
+	 *
 	 *****************************************************************/
 	public void inc() {
 		if (!isSuspended()) {
@@ -327,6 +332,8 @@ public class StopWatch  {
 	 * Method that decreases the StopWatch object by 1 millisecond.
 	 * Calls the convertToMilli method, subtracts one, then updates
 	 * object variables.
+	 * @throws IllegalArgumentException if the milliseconds variable is
+	 * invalid, ie less than zero.
 	 *****************************************************************/
 	public void dec() {
 		if (!isSuspended()) {
@@ -345,9 +352,11 @@ public class StopWatch  {
 	}
 
 	/*****************************************************************
-	 * Method concats minutes, seconds, milliseconds variables into
+	 * Method concatenates minutes, seconds, milliseconds variables into
 	 * temporary string variable and adds leading zeros based on the
 	 * values of seconds and milliseconds. Returns a string.
+	 * @returns a string in MIN:SEC:MILLI/0:00:00 format for the
+	 * stopwatch object.
 	 *****************************************************************/
 	public String toString() {
 		String outputString = "";
@@ -377,6 +386,10 @@ public class StopWatch  {
 	/*****************************************************************
 	 * Method that saves the current object using "out" and printing
 	 * each variable on a new line.
+	 * @param filename used to set the name of the file that is saved
+	 * by the print writer.
+	 * @throws IllegalArgumentException if the name of the file is invalid
+	 * or user does not have proper permissions to save.
 	 *****************************************************************/
 	public void save(String filename) {
 		if (filename == null)
@@ -402,6 +415,9 @@ public class StopWatch  {
 	/*****************************************************************
 	 * Method that loads a stopwatch object and reads each variable
 	 * from the next line.
+	 * @param filename is used to select the filename of the file loaded
+	 * into the scanner.
+	 * @throws IllegalArgumentException if the file cannot be found.
 	 *****************************************************************/
 	public void load(String filename)  {
 		if (filename == null)
@@ -429,6 +445,8 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Method that sets the stopwatch suspend status
+	 * @param tmpSuspend is the the boolean variable used to set the
+	 * suspend state of the stopwatch object to true or false.
 	 *****************************************************************/
 	public static void setSuspend(boolean tmpSuspend) {
 	if (tmpSuspend) {
@@ -441,6 +459,7 @@ public class StopWatch  {
 
 	/*****************************************************************
 	 * Method to check if stopwatch is suspended.
+	 * @returns a true/false boolean of the stopwatch's suspend state.
 	 *****************************************************************/
 	public static boolean isSuspended() {
 		if (suspend) {
@@ -452,14 +471,19 @@ public class StopWatch  {
 	}
 
 	/*****************************************************************
-	 * Getting method for minutes
+	 * Getter method for minutes
+	 * @returns the minutes variable of the stopwatch object.
 	 *****************************************************************/
 	public int getMinutes() {
 		return this.minutes;
 	}
 
 	/*****************************************************************
-	 * Setter method for minutes
+	 * Setter method for minutes.
+	 * @param minutes is the variable used by the method to set the minutes
+	 * of the stopwatch object.
+	 * @throws IllegalArgumentException if the number of minutes is
+	 * illegal, ie less than zero.
 	 *****************************************************************/
 	public void setMinutes(int minutes) {
 		if (minutes < 0)
@@ -468,14 +492,19 @@ public class StopWatch  {
 	}
 
 	/*****************************************************************
-	 * Getter method for seconds
+	 * Getter method for seconds.
+	 * @returns the seconds variable of the stopwatch object.
 	 *****************************************************************/
 	public int getSeconds() {
 		return this.seconds;
 	}
 
 	/*****************************************************************
-	 * Setter method for seconds
+	 * Setter method for seconds.
+	 * @param seconds is the variable used by the method to set the
+	 * seconds variable of the stopwatch object.
+	 * @throws IllegalArgumentException if the seconds variable is
+	 * in not in the valid range of 0-59.
 	 *****************************************************************/
 	public void setSeconds(int seconds) {
 		if (seconds < 0 || seconds > 59)
@@ -484,14 +513,19 @@ public class StopWatch  {
 	}
 
 	/*****************************************************************
-	 * Getter method for milliseconds
+	 * Getter method for milliseconds.
+	 * @returns milliseconds of the stopwatch object.
 	 *****************************************************************/
 	public int getMilliseconds() {
 		return this.milliseconds;
 	}
 
 	/*****************************************************************
-	 * Setter method for milliseconds
+	 * Setter method for milliseconds.
+	 * @param milliseconds variable used by the method to set
+	 * milli seconds on stopwatch.
+	 * @throws IllegalArgumentException if variable passed to method is
+	 * not in the valid range of 0-999.
 	 *****************************************************************/
 	public void setMilliseconds(int milliseconds) {
 		if (milliseconds < 0 || milliseconds > 999)

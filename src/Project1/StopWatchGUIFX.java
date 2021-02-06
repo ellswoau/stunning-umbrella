@@ -47,7 +47,7 @@ public class StopWatchGUIFX extends Application {
 
         root.setStyle(cssLayout);
         primaryStage.setTitle("StopWatch");
-        primaryStage.setScene(new Scene(root, 1200, 300));
+        primaryStage.setScene(new Scene(root, 1200, 350));
         primaryStage.show();
     }
 

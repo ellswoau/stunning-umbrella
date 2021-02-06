@@ -6,7 +6,8 @@ import java.util.Scanner;
 /*****************************************************************
  ********
  *
- * A set of methods that create and manipulate a stopwatch
+ * A set of methods that create and manipulate a stopwatch that
+ * keeps track of minutes, seconds, and milliseconds
  *
  * @author Austin Ellsworth & Kit Bazner
  * @version 02/02/2021
@@ -15,14 +16,16 @@ import java.util.Scanner;
 public class StopWatch  {
 
 
-	// private variables to hold stopwatch time
-	/**Current minutes on stopwatch*/
+	/**Stores current minutes on stopwatch*/
 	private int minutes;
-	/**Current seconds on stopwatch*/
+
+	/**Stores current seconds on stopwatch*/
 	private int seconds;
-	/**Current milliseconds on stopwatch*/
+
+	/**Stores current milliseconds on stopwatch*/
 	private int milliseconds;
 
+	/** Stores whether the stopwatch is suspended or not*/
 	private static boolean suspend = false;
 
 
@@ -30,7 +33,6 @@ public class StopWatch  {
 	 * Default constructor that sets stopwatch object variables to zero
 	 *****************************************************************/
 	public StopWatch() {
-		//setting default stopwatch to zero
 		this.minutes = 0;
 		this.seconds = 0;
 		this.milliseconds = 0;
@@ -86,11 +88,14 @@ public class StopWatch  {
 	 * Constructor for stopwatch object using integer inputs for minutes
 	 * seconds and milliseconds
 	 *
-	 * @param minutes an integer representing the number of minutes the stopwatch will start with
-	 * @param seconds an integer representing the number of seconds the stopwatch will start with
-	 * @param milliseconds an integer representing the number of milliseconds the stopwatch will start with
-	 * @throws IllegalArgumentException throws when parameters are negative, seconds are above 59,
-	 * or milliseconds are above 999
+	 * @param minutes an integer representing the number of minutes the
+	 * stopwatch will start with
+	 * @param seconds an integer representing the number of seconds the
+	 * stopwatch will start with
+	 * @param milliseconds an integer representing the number of
+	 * milliseconds the stopwatch will start with
+	 * @throws IllegalArgumentException throws when parameters are
+	 * negative, seconds are above 59, or milliseconds are above 999
 	 *****************************************************************/
 	public StopWatch(int minutes, int seconds, int milliseconds) {
 		if (minutes < 0) {
@@ -112,8 +117,12 @@ public class StopWatch  {
 	/*****************************************************************
 	 * Construct for stopwatch object using seconds and milliseconds
 	 *
-	 * @param seconds an integer representing the number of seconds the stopwatch will start with
-	 * @param milliseconds an integer representing the number of milliseconds the stopwatch will start with
+	 * @param seconds an integer representing the number of seconds the
+	 * stopwatch will start with
+	 * @param milliseconds an integer representing the number of
+	 * milliseconds the stopwatch will start with
+	 * @throws IllegalArgumentException when seconds are not between 0
+	 * and 59, or when milliseconds are not between 0 and 999
 	 *****************************************************************/
 	public StopWatch(int seconds, int milliseconds) {
 		this.minutes = 0;
@@ -129,12 +138,14 @@ public class StopWatch  {
 	/*****************************************************************
 	 * Constructor for stopwatch object using only milliseconds
 	 *
-	 * @param milliseconds an integer representing the number of milliseconds the stopwatch will start with
+	 * @param milliseconds an integer representing the number of milliseconds
+	 * the stopwatch will start with
+	 * @throws IllegalArgumentException when
 	 *****************************************************************/
 	public StopWatch(int milliseconds) {
 		this.minutes = 0;
 		this.seconds = 0;
-		// changed milliseconds greater than from 59 to 999
+
 		if (milliseconds < 0 || milliseconds > 999) {
 			throw new IllegalArgumentException();
 		}
@@ -163,7 +174,6 @@ public class StopWatch  {
 	 * @param stopWatch2 a second stopwatch object to be compared
 	 * @throws IllegalArgumentException thrown when parameters are null
 	 *****************************************************************/
-	//needs testing
 	public static boolean equals(StopWatch stopWatch1, StopWatch stopWatch2) {
 		if (stopWatch1 == null || stopWatch2 == null)
 			throw new IllegalArgumentException();
@@ -175,7 +185,8 @@ public class StopWatch  {
 	 * Method that compares stopwatch objects using instanceof
 	 *
 	 * @param other an object that is to be compared with stopwatch
-	 * @throws IllegalArgumentException throws when other is null or not an instance of stopwatch
+	 * @throws IllegalArgumentException throws when other is null or
+	 * not an instance of stopwatch
 	 *****************************************************************/
 	public boolean equals(Object other) {
 		if (other == null)
@@ -190,14 +201,16 @@ public class StopWatch  {
 
 
 	/*****************************************************************
-	 * A method that returns 1 if “this” StopWatch object is greater than the other StopWatch object;
-	 * returns -1 if the “this” StopWatch object is less than the other StopWatch;
-	 * returns 0 if the “this” StopWatch object is equal to the other StopWatch object
+	 * A method that returns 1 if “this” StopWatch object is greater
+	 * than the other StopWatch object;
+	 * returns -1 if the “this” StopWatch object is less
+	 * than the other StopWatch;
+	 * returns 0 if the “this” StopWatch object is equal
+	 * to the other StopWatch object
 	 *
 	 * @param other a stopwatch to compare to current stopwatch
 	 * @throws IllegalArgumentException throws when other is null
 	 *****************************************************************/
-	//needs testing
 	public int compareTo(StopWatch other) {
 		if (other == null)
 			throw new IllegalArgumentException();
@@ -257,6 +270,7 @@ public class StopWatch  {
 			}
 		}
 	}
+
 	/*****************************************************************
 	 * Method uses for loop to run dec method n (milliseconds) number
 	 * of times.

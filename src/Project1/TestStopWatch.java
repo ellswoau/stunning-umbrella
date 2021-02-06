@@ -5,16 +5,7 @@ import static org.junit.Assert.*;
 
 public class TestStopWatch {
 
-	/**
-	 * The following are simple random JUnit test cases... After talking with your
-	 * instructor, create many, many more that shows that your code
-	 * is functioning correctly.
-	 * <p>
-	 * <p>
-	 * Prof says we are expected to have 80-100 unique test cases
-	 */
-
-	// default constructor test ******************************************
+	/*default constructor test ******************************************/
 	@Test
 	public void testDefaultConstructor() {
 		StopWatch s = new StopWatch();
@@ -23,7 +14,7 @@ public class TestStopWatch {
 		assertEquals(0, s.getMilliseconds());
 	}
 
-	//3 Integer constructor tests *******************************************
+	/*3 Integer constructor tests *******************************************/
 	@Test
 	public void testConstructor3Parameters() {
 		StopWatch s = new StopWatch(2, 3, 4);
@@ -65,7 +56,7 @@ public class TestStopWatch {
 		new StopWatch(12, 60, 14);
 	}
 
-	//2 Integer constructor tests****************************************************
+	/*2 Integer constructor tests****************************************************/
 	@Test
 	public void testConstructor2Parameters() {
 		StopWatch s = new StopWatch(10, 300);
@@ -102,7 +93,7 @@ public class TestStopWatch {
 		new StopWatch(5, 1000);
 	}
 
-	// 1 Integer constructor tests******************************************************************
+	/* 1 Integer constructor tests******************************************************************/
 	@Test
 	public void testConstructor1Parameter() {
 		StopWatch s = new StopWatch(30);
@@ -129,7 +120,7 @@ public class TestStopWatch {
 		new StopWatch(1000);
 	}
 
-	//String constructor tests**********************************************************************
+	/*String constructor tests**********************************************************************/
 	@Test
 	public void testStringConstructor3Input() {
 		StopWatch s = new StopWatch("20:10:8");
@@ -209,7 +200,7 @@ public class TestStopWatch {
 		new StopWatch("a");
 	}
 
-	//StopWatch Constructor Tests*********************************************************************
+	/*StopWatch Constructor Tests*********************************************************************/
 	@Test
 	public void testStopWatchConstructor() {
 		StopWatch s = new StopWatch(4, 5, 6);
@@ -225,7 +216,7 @@ public class TestStopWatch {
 		new StopWatch(s);
 	}
 
-	//Equals StopWatch Tests*******************************************************
+	/*Equals StopWatch Tests*******************************************************/
 	@Test
 	public void testEqualsStopWatchTrue() {
 		StopWatch s1 = new StopWatch(12, 31, 52);
@@ -275,7 +266,7 @@ public class TestStopWatch {
 		StopWatch.equals(s1, s2);
 	}
 
-	//Equals Object Tests*********************************************************************
+	/*Equals Object Tests*********************************************************************/
 	@Test
 	public void testEqualsObjectTrue() {
 		StopWatch s1 = new StopWatch(5, 59, 300);
@@ -318,7 +309,7 @@ public class TestStopWatch {
 		s.equals(o);
 	}
 
-	//Compare to Tests************************************************************
+	/*Compare to Tests************************************************************/
 	@Test
 	public void testCompareToEquals() {
 		StopWatch s1 = new StopWatch (9, 1, 300);
@@ -375,7 +366,7 @@ public class TestStopWatch {
 		s1.compareTo(s2);
 	}
 
-	//toString tests************************************************************
+	/*toString tests************************************************************/
 	@Test
 	public void testToString0(){
 		StopWatch s = new StopWatch(0,0,0);
@@ -436,7 +427,7 @@ public class TestStopWatch {
 		assertEquals("0:00:009", s.toString());
 	}
 
-	//Add milliseconds Tests***********************************************************************8
+	/*Add milliseconds Tests***********************************************************************/
 	@Test
 	public void testAddInt0(){
 		StopWatch s = new StopWatch (0,0,0);
@@ -554,7 +545,7 @@ public class TestStopWatch {
 		s.add(-5);
 	}
 
-	//Add Stopwatch tests************************************************************
+	/*Add Stopwatch tests************************************************************/
 	@Test
 	public void testAddStopWatch0(){
 		StopWatch s1 = new StopWatch(0,0,0);
@@ -684,7 +675,7 @@ public class TestStopWatch {
 		s1.add(s2);
 	}
 
-	// Sub Int tests****************************************************************
+	/*Sub Int tests****************************************************************/
 	@Test
 	public void testSubInt0(){
 		StopWatch s = new StopWatch(2,4,5);
@@ -771,7 +762,7 @@ public class TestStopWatch {
 		s.sub(4051);
 	}
 
-	//sub StopWatch tests*******************************************************
+	/*sub StopWatch tests*******************************************************/
 	@Test
 	public void testSubStopWatch0(){
 		StopWatch s1 = new StopWatch(0,0,0);
@@ -868,7 +859,7 @@ public class TestStopWatch {
 		s1.sub(s2);
 	}
 
-	//Inc Tests **********************************************************************
+	/*Inc Tests **********************************************************************/
 	@Test
 	public void testInc(){
 		StopWatch s = new StopWatch(0,0,0);
@@ -907,7 +898,7 @@ public class TestStopWatch {
 		assertEquals(0, s.getMilliseconds());
 	}
 
-	//Dec Tests************************************************************************
+	/*Dec Tests************************************************************************/
 	@Test
 	public void testDec(){
 		StopWatch s = new StopWatch(6,5,4);
@@ -952,7 +943,7 @@ public class TestStopWatch {
 		s.dec();
 	}
 
-	//set Minutes tests **************************************************************
+	/*set Minutes tests **************************************************************/
 	@Test
 	public void testSetMinutes0(){
 		StopWatch s = new StopWatch(1,1,1);
@@ -977,7 +968,7 @@ public class TestStopWatch {
 		s.setMinutes(-1);
 	}
 
-	//set Seconds tests ****************************************************************
+	/*set Seconds tests ****************************************************************/
 	@Test
 	public void testSetSeconds0(){
 		StopWatch s = new StopWatch(1,1,1);
@@ -1008,7 +999,7 @@ public class TestStopWatch {
 		s.setSeconds(60);
 	}
 
-	//Set Milliseconds Test *************************************************************
+	/*Set Milliseconds Test *************************************************************/
 	@Test
 	public void testSetMilliseconds(){
 		StopWatch s = new StopWatch(0,0,0);
@@ -1039,7 +1030,7 @@ public class TestStopWatch {
 		s.setMilliseconds(-1);
 	}
 
-	//Load/save tests*********************************************************************
+	/*Load/save tests*********************************************************************/
 	@Test
 	public void testLoadSave () {
 		StopWatch s1 = new StopWatch(5,59,300);
